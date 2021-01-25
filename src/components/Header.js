@@ -1,25 +1,25 @@
-
-
+import { AppBar, Toolbar, IconButton, Button, Link } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 const Header = (props) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container">
-        <a className="navbar-brand" href="/">Heisenbier</a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav">
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" href="/">
+          Heisenbier
+        </Typography>
+        <Button color="inherit" href="/brassagem">
+          Brassagem
+        </Button>
+        <Button color="inherit" href="/">
+          Home
+        </Button>
 
+        <Button color="inherit" href="/config">
+          Config
+        </Button>
+      </Toolbar>
+    </AppBar>
+  );
+};
 
-            <a className="nav-link" href="/brassagem">Brassagem</a>
-            <a className="nav-link" href="/config">Config</a>
-
-          </div>
-        </div>
-      </div>
-    </nav>
-  )
-}
-
-export default Header
+export default Header;

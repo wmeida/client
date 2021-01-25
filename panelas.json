@@ -1,0 +1,38 @@
+{
+  "panelas": [
+    {
+      "id": 1,
+      "nome": "Mostura",
+      "habilitada": true,
+      "freqpwm": 50,
+      "tempoffset": 0,
+      "sensor": "000000"
+    },
+    {
+      "id": 2,
+      "nome": "Agua",
+      "habilitada": true,
+      "freqpwm": 50,
+      "tempoffset": 0,
+      "sensor": "000000"
+    },
+    {
+      "id": 3,
+      "nome": "Fervura",
+      "habilitada": true,
+      "freqpwm": 50,
+      "tempoffset": 0,
+      "sensor": "000000"
+    }
+  ],
+  "sensores": [
+    {
+      "sn": "000000001",
+      "temperatura": 23
+    },
+    {
+      "sn": "000000002",
+      "temperatura": 24
+    }
+  ]
+}

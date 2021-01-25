@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 const PanelaConfig = ({ panela }) => {
-  console.log(panela)
+  console.log(panela);
   return (
     <div>
-      <input class="form-control" type="text" aria-label="Disabled input example" disabled>{panela.nome}</input>
+      {panela.nome} {panela.sensor}
     </div>
-  )
-}
+  );
+};
 
-export default PanelaConfig
+export default PanelaConfig;
