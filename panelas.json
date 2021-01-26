@@ -3,10 +3,10 @@
     {
       "id": 1,
       "nome": "Mostura",
-      "habilitada": true,
+      "habilitada": false,
       "freqpwm": 50,
       "tempoffset": 0,
-      "sensor": "000000"
+      "sensor": "000000001"
     },
     {
       "id": 2,
@@ -14,15 +14,15 @@
       "habilitada": true,
       "freqpwm": 50,
       "tempoffset": 0,
-      "sensor": "000000"
+      "sensor": "000000001"
     },
     {
       "id": 3,
       "nome": "Fervura",
-      "habilitada": true,
+      "habilitada": false,
       "freqpwm": 50,
       "tempoffset": 0,
-      "sensor": "000000"
+      "sensor": "000000001"
     }
   ],
   "sensores": [

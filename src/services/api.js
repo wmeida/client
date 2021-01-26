@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
-// Pode ser algum servidor executando localmente: 
+// Pode ser algum servidor executando localmente:
 // http://localhost:3000
 
 const api = axios.create({
-  baseURL: "http://192.168.0.83:3333",
+  baseURL: 'http://localhost:3000',
 });
 
 export default api;
