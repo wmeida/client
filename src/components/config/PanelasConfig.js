@@ -15,29 +15,16 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useState } from 'react';
 
-/* const PanelasConfig = ({ panelas, onUpdate, temppanelas }) => {
-  return (
-    <>
-      {panelas.map((panela) => (
-        <PanelaConfig
-          panela={panela}
-          temppanelas={temppanelas}
-          onUpdate={onUpdate}
-        />
-      ))}
-    </>
-  );
-}; */
 
 const PanelasConfig = ({ panelas, onUpdate, sensores }) => {
-  console.log(panelas);
+
   const handleChange = (event) => {
-    console.log(event.target);
+    //console.log(event.target);
   };
   return (
     <>
       {panelas.map((panela) => (
-        <Card variant="outlined">
+        <Card variant="outlined" key={panela.id}>
           <CardContent>
             <Typography>Panela {panela.nome}</Typography>
             <FormControlLabel
@@ -73,9 +60,7 @@ const PanelasConfig = ({ panelas, onUpdate, sensores }) => {
                 value={panela.sensor}
                 onChange={handleChange}
               >
-                {sensores.map((sensor) => (
-                  <MenuItem value={sensor.sn}>{sensor.sn}</MenuItem>
-                ))}
+
               </Select>
             </FormControl>
           </CardContent>
@@ -86,6 +71,3 @@ const PanelasConfig = ({ panelas, onUpdate, sensores }) => {
 };
 
 export default PanelasConfig;
-//{panelas.map((panela) => (<h3>{panela.nome}</h3>))}
-//<h3>{panela.nome}</h3>
-//<PanelaConfig panela={panela} />

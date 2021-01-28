@@ -35,7 +35,7 @@ const PanelaConfig = ({ panela, onUpdate }) => {
   const [habilitada, setHabilitada] = useState(panela.habilitada);
   const handleChange = (event) => {
     setHabilitada(event.target.checked);
-    console.log(panela.habilitada);
+    //console.log(panela.habilitada);
   };
   return (
     <div>
