@@ -1,49 +1,40 @@
-//import axios from 'axios';
-import { useState, useEffect, useContext } from 'react';
-import api from '../../services/api.js';
-//import axios from 'axios'
+import { useEffect, useContext } from 'react';
+
 import Sensores from './Sensores.js';
 import PanelasConfig from './PanelasConfig.js';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { GlobalContext } from '../../context/GlobalState'
-
+import { GlobalContext } from '../../context/GlobalState';
 
 const Config = () => {
+  const {
+    panelas,
+    getPanelas,
+    bombas,
+    getBombas,
+    buzzers,
+    getBuzzers,
+  } = useContext(GlobalContext);
 
-  const { config, getConfig } = useContext(GlobalContext)
-
-
-
-
-  const updateConfig = (id) => {
-
-    const updatedConfig = config.map((conf) => {
-      if (conf.id === id) {
-        conf.habilitada = !conf.habilitada;
-      }
-      return conf;
-    });
-
-  };
-  const salvarConfig = () => {
-
-  };
+  // const updatePanelas = (id) => {
+  //   panelas.map((conf) => {
+  //     if (conf.id === id) {
+  //       conf.habilitada = !conf.habilitada;
+  //     }
+  //     return conf;
+  //   });
+  // };
+  const salvarConfig = () => {};
 
   useEffect(() => {
-
-    getConfig();
-
+    getPanelas();
+    getBombas();
+    getBuzzers();
   }, []);
 
   return (
     <div>
-
-      <PanelasConfig
-        panelas={config}
-
-        onUpdate={updateConfig}
-      />
+      <PanelasConfig panelas={panelas} />
       <ButtonGroup disableElevation variant="contained" color="primary">
         <Button onClick={salvarConfig}>Salvar</Button>
         <Button>Cancelar</Button>
@@ -53,8 +44,3 @@ const Config = () => {
 };
 
 export default Config;
-//<PanelasConfig panelas={config.panelas} />
-//<Sensores sensores={sensores} />
-//<PanelasConfig panelas={config.panelas} />
-//<Sensores sensores={sensores} />
-//   <PanelasConfig panelas={config.panelas} />
