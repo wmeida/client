@@ -14,6 +14,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useState } from 'react';
+import Grid from '@material-ui/core/Grid'
 
 
 const PanelasConfig = ({ panelas, onUpdate, sensores }) => {
@@ -22,51 +23,17 @@ const PanelasConfig = ({ panelas, onUpdate, sensores }) => {
     //console.log(event.target);
   };
   return (
-    <>
-      {panelas.map((panela) => (
-        <Card variant="outlined" key={panela.id}>
-          <CardContent>
-            <Typography>Panela {panela.nome}</Typography>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={panela.habilitada}
-                  onChange={handleChange}
-                  name={panela.nome}
-                  color="primary"
-                />
-              }
-              label="Habilitada"
-            />
-            <TextField
-              id="txt-offset"
-              label="Temp offset"
-              variant="outlined"
-              type="number"
-            />
-            <TextField
-              id="txt-freq"
-              label="Frequencia PWM"
-              variant="outlined"
-              type="number"
-            />
-            <FormControl>
-              <InputLabel id="demo-simple-select-label">
-                Sensor Number
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={panela.sensor}
-                onChange={handleChange}
-              >
 
-              </Select>
-            </FormControl>
-          </CardContent>
-        </Card>
-      ))}
-    </>
+    <div style={{ margin: 20, padding: 20 }}>
+      <Grid container spacing={40} justify="center">
+        {panelas.map((panela) => (
+          <PanelaConfig panela={panela} />
+
+        ))
+        }
+      </Grid>
+
+    </div >
   );
 };
 

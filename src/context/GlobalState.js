@@ -6,6 +6,7 @@ const initialState = {
   panelas: [],
   bombas: [],
   buzzers: [],
+  sensores: []
 };
 
 export const GlobalContext = createContext(initialState);
@@ -22,6 +23,13 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  async function updatePanela(id, pan) {
+    console.log("updating panela", id, pan)
+    const res = await axios.put(`http://192.168.0.83:3333/panelas/${parseInt(id)}`, pan);
+
+
+  }
+
   async function getBombas() {
     const res = await axios.get('http://192.168.0.83:3333/bombas');
 
@@ -31,11 +39,34 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  async function updateBomba(id, bom) {
+    console.log("updating bomba", id, bom)
+    const res = await axios.put(`http://192.168.0.83:3333/bombas/${parseInt(id)}`, bom);
+
+
+  }
+
   async function getBuzzers() {
     const res = await axios.get('http://192.168.0.83:3333/buzzers');
 
     dispatch({
       type: 'GET_BUZZERS',
+      payload: res.data,
+    });
+  }
+
+  async function updateBuzzer(id, buz) {
+    console.log("updating buzzer", id, buz)
+    const res = await axios.put(`http://192.168.0.83:3333/buzzers/${parseInt(id)}`, buz);
+
+
+  }
+
+  async function getSensores() {
+    const res = await axios.get('http://192.168.0.83:3333/sensores');
+
+    dispatch({
+      type: 'GET_SENSORES',
       payload: res.data,
     });
   }
@@ -49,6 +80,8 @@ export const GlobalProvider = ({ children }) => {
         getBombas,
         buzzers: state.buzzers,
         getBuzzers,
+        sensores: state.sensores,
+        getSensores, updatePanela, updateBomba, updateBuzzer
       }}
     >
       {children}
