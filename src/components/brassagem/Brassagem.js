@@ -1,19 +1,41 @@
 import React from 'react';
+import { useEffect, useContext } from 'react';
+
+import { GlobalContext } from '../../context/GlobalState';
+import Panelas from './Panelas'
 
 const Brassagem = () => {
-  // useEffect(() => {
-  //   const interval = setInterval(async () => {
+  const {
+    panelas,
+    getPanelas,
+    bombas,
+    getBombas,
+    panelaspanelas,
+    getPanelasPanelas,
 
-  //     const res = await api.get('sensores',)
 
-  //     console.log(res.data)
-  //     setSensores(res.data)
+  } = useContext(GlobalContext);
 
-  //   }, 1000);
-  //   return () => clearInterval(interval)
 
-  // }, [])
-  return <div>Brassagem</div>;
+  useEffect(() => {
+
+    getBombas();
+    const interval = setInterval(async () => {
+      getPanelasPanelas()
+
+
+
+      //console.log(panelaspanelas)
+
+    }, 1000);
+    return () => clearInterval(interval)
+
+  }, [])
+  return (
+    <>
+      <Panelas panelas={panelaspanelas} />
+    </>
+  )
 };
 
 export default Brassagem;

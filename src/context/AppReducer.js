@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 export default (state, action) => {
-  console.log(action.payload)
+  //console.log(action.payload)
   switch (action.type) {
 
     case 'GET_PANELAS':
@@ -8,6 +8,14 @@ export default (state, action) => {
       return {
         ...state,
         panelas: action.payload,
+
+      };
+
+    case 'GET_PANELASPANELAS':
+
+      return {
+        ...state,
+        panelaspanelas: action.payload,
 
       };
 

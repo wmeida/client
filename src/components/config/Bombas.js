@@ -1,16 +1,18 @@
 import React from 'react'
 import Bomba from './Bomba'
 
+
 const Bombas = (bombas) => {
-  console.log(bombas.bombas)
+  //console.log(bombas.bombas)
 
-  return (
-    <>
-      {bombas.bombas.map((bomba) => (<Bomba bomba={bomba} key={bomba.id} />))}
+  return /*(
+    <div style={{ margin: 20, padding: 20 }}>
+      { <Grid container spacing={40} justify="center">
+        {bombas.bombas.map((bomba) => (<Bomba bomba={bomba} key={bomba.id} />))}
 
-
-    </>
-  )
+      </Grid> }
+    </div>
+  )*/
 }
 
 export default Bombas

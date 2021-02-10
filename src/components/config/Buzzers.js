@@ -1,15 +1,14 @@
 import React from 'react'
 import Buzzer from './Buzzer'
 
+
 const Buzzers = (buzzers) => {
-  console.log(buzzers.buzzers)
+  //console.log(buzzers.buzzers)
 
   return (
-    <>
-      {buzzers.buzzers.map((buzzer) => (<Buzzer buzzer={buzzer} key={buzzer.id} />))}
+    <div >
 
-
-    </>
+    </div>
   )
 }
 

@@ -5,8 +5,6 @@ import PanelasConfig from './PanelasConfig.js';
 import Bombas from './Bombas'
 import Buzzers from './Buzzers'
 
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { GlobalContext } from '../../context/GlobalState';
 
 const Config = () => {
@@ -39,13 +37,15 @@ const Config = () => {
   }, []);
 
   return (
-    <div>
+    <>
+
+
       <Sensores sensores={sensores} />
       <PanelasConfig panelas={panelas} />
       <Bombas bombas={bombas} />
       <Buzzers buzzers={buzzers} />
 
-    </div>
+    </>
   );
 };
 
