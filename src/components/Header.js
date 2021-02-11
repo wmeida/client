@@ -1,31 +1,21 @@
 import 'antd/dist/antd.css';
-import { PageHeader, Button, Descriptions } from 'antd';
+import { PageHeader, Button } from 'antd';
 const Header = (props) => {
   return (
     <PageHeader
       ghost={false}
 
       title="Heisenbier"
-      subTitle="This is a subtitle"
+      subTitle="Your own beer"
       extra={[
-        <Button key="3">Operation</Button>,
-        <Button key="2">Operation</Button>,
-        <Button key="1" type="primary">
-          Primary
+        <Button key="3" href="/">Home</Button>,
+        <Button key="2" href="/brassagem">Brassagem</Button>,
+        <Button key="1" href="/config" >
+          Settings
         </Button>,
       ]}
     >
-      <Descriptions size="small" column={3}>
-        <Descriptions.Item label="Created">Lili Qu</Descriptions.Item>
-        <Descriptions.Item label="Association">
-          <a>421421</a>
-        </Descriptions.Item>
-        <Descriptions.Item label="Creation Time">2017-01-10</Descriptions.Item>
-        <Descriptions.Item label="Effective Time">2017-10-10</Descriptions.Item>
-        <Descriptions.Item label="Remarks">
-          Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
-        </Descriptions.Item>
-      </Descriptions>
+
     </PageHeader>
     // <AppBar position="static">
     //   <Toolbar>

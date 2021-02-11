@@ -1,5 +1,7 @@
 import React from 'react'
 import Panela from './Panela'
+import { Row } from 'antd';
+import 'antd/dist/antd.css';
 
 
 
@@ -8,9 +10,9 @@ import Panela from './Panela'
 const Panelas = ({ panelas }) => {
   //const classes = useStyles()
   //console.log(panelas)
-  return /*(
+  return (
     <div >
-      { <Grid container >
+      <Row type="flex" justify="center" gutter={[12, 60]} >
         {panelas.filter((panela) => {
           //console.log(panela)
           return panela.habilitada === true
@@ -19,9 +21,9 @@ const Panelas = ({ panelas }) => {
 
           (<Panela panela={panela} />)
         )}
-      </Grid> }
+      </Row>
     </div>
-  )*/
+  )
 }
 
 export default Panelas
