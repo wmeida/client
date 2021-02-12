@@ -15,7 +15,7 @@ const App = () => {
   return (
     <GlobalProvider>
       <Router>
-        <div >
+        <div  >
           <Header title="Heisenbier" />
           <Switch>
             <Route path="/" exact component={Home} />

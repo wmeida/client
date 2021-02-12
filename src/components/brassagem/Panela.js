@@ -19,6 +19,8 @@ import PropTypes from 'prop-types';
 
 import { GlobalContext } from '../../context/GlobalState';
 
+const style = { padding: '30px' };
+
 function Panela(panela) {
   //console.log(panela)
   const info = () => {
@@ -35,22 +37,22 @@ function Panela(panela) {
     ligarPanela(event.target.id);
   };
   return (
-    <Col xs={20} md={10} lg={6} offset={1}>
+    <Col xs={24} lg={6} style={style}>
       <Card
         title={panela.panela.nome}
         bordered
         extra={<Button type="primary">Ligar</Button>}
-        style={{ width: 300, backgroundColor: '#f0f5ff', border: 2 }}
+        style={{ backgroundColor: '#fff', border: 2, borderStyle: 'solid', borderWidth: 3, borderColor: '#000' }}
         actions={[
           <SettingOutlined key="setting" onClick={info} />,
           <EditOutlined key="edit" />,
           <EllipsisOutlined key="ellipsis" />,
         ]}
       >
-        <Divider />
 
-        <Row gutter={24}>
-          <Col>
+
+        <Row justify="center">
+          <Col span={12}>
             <Statistic
               title="Temperatura"
               value={panela.panela.temperatura}
@@ -58,10 +60,11 @@ function Panela(panela) {
               valueStyle={{ color: '#3f8600' }}
               suffix="C"
             />
+            <small>67C</small>
           </Col>
 
-          <Col>
-            <Progress type="circle" percent={30} width={80} onClick={info}>
+          <Col span={12}>
+            <Progress type="circle" percent={panela.panela.potencia} width={80} onClick={info}>
               Potencia
             </Progress>
           </Col>

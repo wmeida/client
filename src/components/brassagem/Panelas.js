@@ -11,8 +11,8 @@ const Panelas = ({ panelas }) => {
   //const classes = useStyles()
   //console.log(panelas)
   return (
-    <div >
-      <Row type="flex" justify="center" gutter={[12, 60]} >
+    < >
+      <Row justify="space-around">
         {panelas.filter((panela) => {
           //console.log(panela)
           return panela.habilitada === true
@@ -22,7 +22,7 @@ const Panelas = ({ panelas }) => {
           (<Panela panela={panela} />)
         )}
       </Row>
-    </div>
+    </>
   )
 }
 

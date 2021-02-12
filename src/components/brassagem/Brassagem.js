@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useContext, useState } from 'react';
-import { Drawer, Button } from 'antd';
+import { Row, Col } from 'antd';
+
 import 'antd/dist/antd.css';
 
 import { GlobalContext } from '../../context/GlobalState';
@@ -27,10 +28,17 @@ const Brassagem = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <>
-      <Processo />
-      <Panelas panelas={panelaspanelas} />
-    </>
+
+    <Row gutter={12} style={{ margin: "20", padding: "20", background: "#000" }}>
+      <Col xs={24} lg={9}>
+        <Processo />
+      </Col>
+      <Col sm={24} lg={15}>
+        <Panelas panelas={panelaspanelas} />
+      </Col>
+    </Row>
+
+
   );
 };
 
