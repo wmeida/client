@@ -1,228 +1,93 @@
-import React from 'react';
-import { Row, Col, Button, Card, Divider, List, Switch, Form, Statistic } from 'antd';
+import React, { useState, useContext } from 'react';
+import { Row, Col, Button, Card, Divider, List, Switch, Form, Statistic, message, Progress, Modal, Radio, Steps } from 'antd';
+import { Collapse, PageHeader } from 'antd';
+import Panelas from './Panelas'
+import { GlobalContext } from '../../context/GlobalState';
+
+
+
 import {
   EditOutlined,
   EllipsisOutlined,
   SettingOutlined,
   PlayCircleTwoTone,
-  PauseCircleTwoTone,
-  StopTwoTone
-} from '@ant-design/icons';
+  PlayCircleOutlined,
+  PauseOutlined,
+  StepForwardOutlined,
 
+
+  DeleteOutlined,
+
+} from '@ant-design/icons';
+const { Panel } = Collapse;
 const style = { padding: '30px ' };
 
-const Processo = () => {
-  const steps = {
-    brassagem:
-      [{ etapa: 'Mash in', temperatura: 50, tempo: 15 },
-      { etapa: 'Sacarificacao', temperatura: 67, tempo: 60 },
-      { etapa: 'Mash out', temperatura: 76, tempo: 10 }],
-    lavagem:
-      [{ etapa: 'Filtragem', temperatura: 76, tempo: 10 },
-      { etapa: 'Lavagem', temperatura: 67, tempo: 15 },
-      ],
-    fervura:
-      [{ etapa: 'Fervura', temperatura: 97, tempo: 60 },
-      ],
-    whirpool:
-      [{ etapa: 'Whirpool', temperatura: 0, tempo: 20 },
-      ],
-    resfriamento:
-      [{ etapa: 'Resfriamento', temperatura: 20, tempo: 30 },
-      ],
-    fermentacao:
-      [{ etapa: 'Fermentacao', temperatura: 19, tempo: 10080 },
-      ],
-    maturacao:
-      [{ etapa: 'Maturacao', temperatura: 9, tempo: 10080 },
-      { etapa: 'Cold Crash', temperatura: 0, tempo: 7200 }
-      ],
-  };
-  return (
-    <>
+const { Step } = Steps;
 
+const Processo = ({ processo, panelas }) => {
 
-      <Col sm={24} style={style}>
+  // const [isModalVisible, setIsModalVisible] = useState(false);
+
+  // const showModal = () => {
+  //   setIsModalVisible(true);
+  // };
+
+  // const handleOk = () => {
+  //   setIsModalVisible(false);
+  // };
+
+  // const handleCancel = () => {
+  //   setIsModalVisible(false);
+  // };
+
+  if (processo.modo === "receita") {
+
+    return (
+      <>
+        <PageHeader style={{ background: "#fff" }}>
+          <Steps current={2} percent={60}>
+            <Step title="Mostura" subTitle="Left 00:00:08" description="Descrição da mostura" />
+            <Step title="Filtragem / Sparge" subTitle="Left 00:00:08" description="Descrição" />
+            <Step title="Fervura" subTitle="Left 00:00:08" description="Descrição da fervura" />
+          </Steps>
+        </PageHeader>
 
 
 
-        <Card
-          title="Processo"
-          bordered
-          hoverable={true}
 
-          style={{ backgroundColor: '#fff', borderStyle: 'solid', borderWidth: 3, borderColor: '#000' }}
-          actions={[
-            <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" />,
-            <EllipsisOutlined key="ellipsis" />,
-          ]}
-        >
-          <Card type="inner" title="" extra={[<Button icon={<PlayCircleTwoTone />}>Iniciar</Button>,
-          <Button icon={<PlayCircleTwoTone />}>Pausar</Button>,
-          <Button icon={<PlayCircleTwoTone />}>Parar</Button>,
-          ]}>
-            <Col span={24}>
-              <Statistic title="Status" value="Pausado" />
-            </Col>
-            <Col span={24}>
-              <Statistic title="Active Users" value={112893} />
-            </Col>
-          </Card>
 
-          <List
 
-            itemLayout="horizontal"
-            header={<div>Mashing steps <Button icon={<PlayCircleTwoTone />}>Add</Button></div>}
-            size="small"
-            bordered
-            dataSource={steps.brassagem}
-            renderItem={(item) => (
-              <List.Item
-                actions={[
-                  <SettingOutlined key="setting" />,
-                  <EditOutlined key="edit" />,
-                  <EllipsisOutlined key="ellipsis" />,
-                ]}
-              >
-                <small>{item.etapa}</small>
-                <small>{item.temperatura} C</small>
-                <small>{item.tempo} minutos</small>
-              </List.Item>
-            )}
-          />
 
-          <List
-            itemLayout="horizontal"
-            header={<div>Lautering steps</div>}
-            size="small"
-            bordered
-            dataSource={steps.lavagem}
-            renderItem={(item) => (
-              <List.Item
-                actions={[
-                  <SettingOutlined key="setting" />,
-                  <EditOutlined key="edit" />,
-                  <EllipsisOutlined key="ellipsis" />,
-                ]}
-              >
-                <small>{item.etapa}</small>
-                <small>{item.temperatura} C</small>
-                <small>{item.tempo} minutos</small>
-              </List.Item>
-            )}
-          />
 
-          <List
-            itemLayout="horizontal"
-            header={<div>Boiling steps</div>}
-            size="small"
-            bordered
-            dataSource={steps.fervura}
-            renderItem={(item) => (
-              <List.Item
-                actions={[
-                  <SettingOutlined key="setting" />,
-                  <EditOutlined key="edit" />,
-                  <EllipsisOutlined key="ellipsis" />,
-                ]}
-              >
-                <small>{item.etapa}</small>
-                <small>{item.temperatura} C</small>
-                <small>{item.tempo} minutos</small>
-              </List.Item>
-            )}
-          />
 
-          <List
-            itemLayout="horizontal"
-            header={<div>Whirpool</div>}
-            size="small"
-            bordered
-            dataSource={steps.whirpool}
-            renderItem={(item) => (
-              <List.Item
-                actions={[
-                  <SettingOutlined key="setting" />,
-                  <EditOutlined key="edit" />,
-                  <EllipsisOutlined key="ellipsis" />,
-                ]}
-              >
-                <small>{item.etapa}</small>
-                <small>{item.temperatura} C</small>
-                <small>{item.tempo} minutos</small>
-              </List.Item>
-            )}
-          />
 
-          <List
-            itemLayout="horizontal"
-            header={<div>Cooling</div>}
-            size="small"
-            bordered
-            dataSource={steps.resfriamento}
-            renderItem={(item) => (
-              <List.Item
-                actions={[
-                  <SettingOutlined key="setting" />,
-                  <EditOutlined key="edit" />,
-                  <EllipsisOutlined key="ellipsis" />,
-                ]}
-              >
-                <small>{item.etapa}</small>
-                <small>{item.temperatura} C</small>
-                <small>{item.tempo} minutos</small>
-              </List.Item>
-            )}
-          />
 
-          <List
-            itemLayout="horizontal"
-            header={<div>Fermenting steps</div>}
-            size="small"
-            bordered
-            dataSource={steps.fermentacao}
-            renderItem={(item) => (
-              <List.Item
-                actions={[
-                  <SettingOutlined key="setting" />,
-                  <EditOutlined key="edit" />,
-                  <EllipsisOutlined key="ellipsis" />,
-                ]}
-              >
-                <small>{item.etapa}</small>
-                <small>{item.temperatura} C</small>
-                <small>{item.tempo} minutos</small>
-              </List.Item>
-            )}
-          />
 
-          <List
-            itemLayout="horizontal"
-            header={<div>Maturing steps</div>}
-            size="small"
-            bordered
-            dataSource={steps.maturacao}
-            renderItem={(item) => (
-              <List.Item
-                actions={[
-                  <SettingOutlined key="setting" />,
-                  <EditOutlined key="edit" />,
-                  <EllipsisOutlined key="ellipsis" />,
-                ]}
-              >
-                <small>{item.etapa}</small>
-                <small>{item.temperatura} C</small>
-                <small>{item.tempo} minutos</small>
-              </List.Item>
-            )}
-          />
-          <Divider />
-        </Card>
 
-      </Col>
-    </>
-  );
+
+
+
+        {/* <Modal title="Editar" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal> */}
+      </>
+    );
+
+  }
+  else {
+
+
+    return (
+      <Panelas panelas={panelas} />
+
+    );
+
+
+
+  }
+
 };
 
 export default Processo;

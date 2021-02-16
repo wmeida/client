@@ -12,7 +12,7 @@ export default (state, action) => {
       };
 
     case 'GET_PANELASPANELAS':
-
+      console.log(action.payload)
       return {
         ...state,
         panelaspanelas: action.payload,
@@ -33,6 +33,17 @@ export default (state, action) => {
       return {
         ...state,
         sensores: action.payload,
+      };
+    case 'GET_CONFIG':
+      return {
+        ...state,
+        config: action.payload,
+      };
+    case 'GET_PROCESSO':
+      console.log(action.payload)
+      return {
+        ...state,
+        processo: action.payload,
       };
     default:
       return state;

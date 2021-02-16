@@ -1,20 +1,22 @@
 import 'antd/dist/antd.css';
-import { PageHeader, Button } from 'antd';
-const Header = (props) => {
+import { PageHeader, Button, Radio, StepsProps, Steps } from 'antd';
+
+const ProcessoHeader = ({ processo }) => {
+
   return (
     <PageHeader
       ghost={false}
 
-      title="Heisenbier"
-      subTitle="Your own beer"
+      title="Modo"
+
       extra={[
-        <Button key="3" href="/">Home</Button>,
-        <Button key="2" href="/brassagem">Brassagem</Button>,
-        <Button key="1" href="/config" >
-          Settings
-        </Button>,
+        <Radio.Group defaultValue="a" buttonStyle="solid">
+          <Radio.Button value="a">Manual</Radio.Button>
+          <Radio.Button value="b">Auto</Radio.Button>
+        </Radio.Group>
       ]}
     >
+
 
     </PageHeader>
     // <AppBar position="static">
@@ -37,4 +39,4 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default ProcessoHeader;

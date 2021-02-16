@@ -7,7 +7,9 @@ const initialState = {
   bombas: [],
   buzzers: [],
   sensores: [],
-  panelaspanelas: []
+  panelaspanelas: [],
+  config: [],
+  processo: {}
 };
 
 export const GlobalContext = createContext(initialState);
@@ -35,7 +37,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function updatePanela(id, pan) {
     //console.log("updating panela", id, pan)
-    const res = await axios.put(`http://192.168.0.83:3333/panelas/${parseInt(id)}`, pan);
+    await axios.put(`http://192.168.0.83:3333/panelas/${parseInt(id)}`, pan);
 
 
   }
@@ -90,6 +92,25 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  async function getConfig() {
+    const res = await axios.get('http://192.168.0.83:3333/config');
+    console.log("config", res.data)
+    dispatch({
+      type: 'GET_CONFIG',
+      payload: res.data,
+    });
+  }
+
+  async function getProcesso() {
+    console.log("getting processo")
+    const res = await axios.get('http://192.168.0.83:3333/processo');
+    console.log("processo", res.data)
+    dispatch({
+      type: 'GET_PROCESSO',
+      payload: res.data,
+    });
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -100,7 +121,7 @@ export const GlobalProvider = ({ children }) => {
         buzzers: state.buzzers,
         getBuzzers,
         sensores: state.sensores,
-        getSensores, updatePanela, updateBomba, updateBuzzer, panelaspanelas: state.panelaspanelas, getPanelasPanelas, ligarPanela
+        getSensores, updatePanela, updateBomba, updateBuzzer, panelaspanelas: state.panelaspanelas, getPanelasPanelas, processo: state.processo, config: state.config, ligarPanela, getConfig, getProcesso
       }}
     >
       {children}
