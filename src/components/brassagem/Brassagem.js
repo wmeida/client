@@ -1,51 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProcessoHeader from './ProcessoHeader'
-import { useEffect, useContext, useState } from 'react';
-import { Row, Col, message, Button } from 'antd';
-import axios from 'axios'
-import XMLParser from 'react-xml-parser'
-import xmlBeer from './doubleipa.xml'
+import { useEffect, useContext } from 'react';
+import socketIO from 'socket.io-client'
 
-import 'antd/dist/antd.css';
+
 
 import { GlobalContext } from '../../context/GlobalState';
 import Processo from './Processo';
-import Panelas from './Panelas';
 
 
+const socket = socketIO("http://192.168.0.83:3002");
 
 
 const Brassagem = () => {
 
 
+
   const {
-    panelas,
-    getPanelas,
-    bombas,
-    getBombas,
-    panelaspanelas,
-    getPanelasPanelas,
+    cfgprocesso,
+    cfgpanelas,
+
     getConfig,
-    getProcesso,
-    processo,
-    config
+
+
+
   } = useContext(GlobalContext);
-
+  const [panelas, setPanelas] = useState(cfgpanelas)
+  socket.on("panelas", (pan) => {
+    //console.log("Chegou panelas", pan)
+    setPanelas(pan)
+    console.log('cfgpanelas', cfgpanelas)
+    console.log('pan', pan)
+  })
   useEffect(() => {
+    getConfig();
+    socket.connect()
     //getBombas();
-    const interval = setInterval(async () => {
-      getPanelasPanelas();
-      getProcesso();
-      //getConfig();
+    // const interval = setInterval(async () => {
+    //   getPanelasPanelas();
 
 
-    }, 1000);
-    return () => clearInterval(interval);
+
+
+
+    // }, 10000);
+    //return () => clearInterval(interval);
   }, []);
   return (
     <>
-      <ProcessoHeader processo={processo} />
-      <Processo processo={processo} panelas={panelaspanelas} />
+      <ProcessoHeader processo={cfgprocesso} />
+      <Processo processo={cfgprocesso} panelas={cfgpanelas} dadospanelas={panelas} />
 
       {/* <Row gutter={12} style={{ margin: "20", padding: "20", background: "#000" }}>
         <Col xs={24} lg={9}>

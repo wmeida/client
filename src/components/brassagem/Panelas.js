@@ -7,13 +7,13 @@ import 'antd/dist/antd.css';
 
 
 
-const Panelas = ({ panelas }) => {
+const Panelas = ({ panelas, dadospanelas }) => {
   //const classes = useStyles()
   //console.log(panelas)
   return (
     < >
       <Row justify="space-around">
-        {panelas.filter((panela) => {
+        {dadospanelas.filter((panela) => {
           //console.log(panela)
           return panela.habilitada === true
 

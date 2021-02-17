@@ -1,8 +1,8 @@
 import 'antd/dist/antd.css';
-import { PageHeader, Button, Radio, StepsProps, Steps } from 'antd';
+import { PageHeader, Radio } from 'antd';
 
 const ProcessoHeader = ({ processo }) => {
-
+  //console.log('processo', processo)
   return (
     <PageHeader
       ghost={false}
@@ -17,7 +17,7 @@ const ProcessoHeader = ({ processo }) => {
       ]}
     >
 
-
+      <small>{processo.modo}</small>
     </PageHeader>
     // <AppBar position="static">
     //   <Toolbar>

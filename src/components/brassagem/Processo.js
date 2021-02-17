@@ -1,31 +1,16 @@
-import React, { useState, useContext } from 'react';
-import { Row, Col, Button, Card, Divider, List, Switch, Form, Statistic, message, Progress, Modal, Radio, Steps } from 'antd';
-import { Collapse, PageHeader } from 'antd';
+
+import { Steps } from 'antd';
+import { PageHeader } from 'antd';
 import Panelas from './Panelas'
-import { GlobalContext } from '../../context/GlobalState';
 
 
 
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-  PlayCircleTwoTone,
-  PlayCircleOutlined,
-  PauseOutlined,
-  StepForwardOutlined,
 
-
-  DeleteOutlined,
-
-} from '@ant-design/icons';
-const { Panel } = Collapse;
-const style = { padding: '30px ' };
 
 const { Step } = Steps;
 
-const Processo = ({ processo, panelas }) => {
-
+const Processo = ({ processo, panelas, dadospanelas }) => {
+  // console.log('pr', processo)
   // const [isModalVisible, setIsModalVisible] = useState(false);
 
   // const showModal = () => {
@@ -67,7 +52,7 @@ const Processo = ({ processo, panelas }) => {
 
 
 
-        {/* <Modal title="Editar" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        { /* <Modal title="Editar" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
           <p>Some contents...</p>
           <p>Some contents...</p>
           <p>Some contents...</p>
@@ -80,14 +65,15 @@ const Processo = ({ processo, panelas }) => {
 
 
     return (
-      <Panelas panelas={panelas} />
+      <Panelas panelas={panelas, dadospanelas} />
 
     );
 
 
 
   }
+}
 
-};
+
 
 export default Processo;

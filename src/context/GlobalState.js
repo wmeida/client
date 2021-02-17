@@ -3,13 +3,16 @@ import AppReducer from './AppReducer';
 import axios from 'axios';
 //Initial State
 const initialState = {
-  panelas: [],
-  bombas: [],
-  buzzers: [],
+
+
   sensores: [],
   panelaspanelas: [],
   config: [],
-  processo: {}
+  cfgprocesso: [],
+  cfgpanelas: [],
+  cfgbombas: [],
+  cfgbuzzers: []
+
 };
 
 export const GlobalContext = createContext(initialState);
@@ -17,14 +20,7 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
-  async function getPanelas() {
-    const res = await axios.get('http://192.168.0.83:3333/panelas');
 
-    dispatch({
-      type: 'GET_PANELAS',
-      payload: res.data,
-    });
-  }
 
   async function getPanelasPanelas() {
     const res = await axios.get('http://192.168.0.83:3333/panelas/panelas');
@@ -41,44 +37,46 @@ export const GlobalProvider = ({ children }) => {
 
 
   }
+  async function alterarPotenciaPanela(id, potencia) {
+    console.log("alterando potencia da panela", id, potencia)
+    // axios({
+    //   method: 'put',
+    //   url: 'http://192.168.0.83:3333/panelas',
+    //   data: id,
+    //   config: { headers: { 'Content-Type': 'application/json' } }
+    // })
+    axios.put(`http://192.168.0.83:3333/panelas`, {
+      "id": id,
+      "potencia": potencia
+
+    });
+
+
+  }
+
 
   async function ligarPanela(id) {
     console.log("ligando panela", id)
-    const res = await axios.put(`http://192.168.0.83:3333/panelas/ligar/${parseInt(id)}`, {
+    await axios.put(`http://192.168.0.83:3333/panelas/ligar/${parseInt(id)}`, {
       action: 'pwm'
     });
 
 
   }
 
-  async function getBombas() {
-    const res = await axios.get('http://192.168.0.83:3333/bombas');
-
-    dispatch({
-      type: 'GET_BOMBAS',
-      payload: res.data,
-    });
-  }
 
   async function updateBomba(id, bom) {
     //console.log("updating bomba", id, bom)
-    const res = await axios.put(`http://192.168.0.83:3333/bombas/${parseInt(id)}`, bom);
+    await axios.put(`http://192.168.0.83:3333/bombas/${parseInt(id)}`, bom);
 
 
   }
 
-  async function getBuzzers() {
-    const res = await axios.get('http://192.168.0.83:3333/buzzers');
 
-    dispatch({
-      type: 'GET_BUZZERS',
-      payload: res.data,
-    });
-  }
 
   async function updateBuzzer(id, buz) {
     //console.log("updating buzzer", id, buz)
-    const res = await axios.put(`http://192.168.0.83:3333/buzzers/${parseInt(id)}`, buz);
+    await axios.put(`http://192.168.0.83:3333/buzzers/${parseInt(id)}`, buz);
 
 
   }
@@ -94,34 +92,29 @@ export const GlobalProvider = ({ children }) => {
 
   async function getConfig() {
     const res = await axios.get('http://192.168.0.83:3333/config');
-    console.log("config", res.data)
+    //console.log(res.data.processo)
     dispatch({
       type: 'GET_CONFIG',
       payload: res.data,
     });
   }
 
-  async function getProcesso() {
-    console.log("getting processo")
-    const res = await axios.get('http://192.168.0.83:3333/processo');
-    console.log("processo", res.data)
-    dispatch({
-      type: 'GET_PROCESSO',
-      payload: res.data,
-    });
-  }
+
 
   return (
     <GlobalContext.Provider
       value={{
-        panelas: state.panelas,
-        getPanelas,
-        bombas: state.bombas,
-        getBombas,
-        buzzers: state.buzzers,
-        getBuzzers,
+
+
+
+        cfgprocesso: state.cfgprocesso,
+        cfgpanelas: state.cfgpanelas,
+        cfgbombas: state.cfgbombas,
+        cfgbuzzers: state.cfgbuzzers,
+
+
         sensores: state.sensores,
-        getSensores, updatePanela, updateBomba, updateBuzzer, panelaspanelas: state.panelaspanelas, getPanelasPanelas, processo: state.processo, config: state.config, ligarPanela, getConfig, getProcesso
+        getSensores, updatePanela, updateBomba, updateBuzzer, panelaspanelas: state.panelaspanelas, getPanelasPanelas, config: state.config, ligarPanela, getConfig, alterarPotenciaPanela
       }}
     >
       {children}

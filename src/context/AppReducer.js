@@ -35,12 +35,17 @@ export default (state, action) => {
         sensores: action.payload,
       };
     case 'GET_CONFIG':
+      //console.log('configall', action.payload)
       return {
         ...state,
         config: action.payload,
+        cfgprocesso: action.payload.processo,
+        cfgpanelas: action.payload.panelas,
+        cfgbombas: action.payload.bombas,
+        cfgbuzzers: action.payload.buzzers
       };
     case 'GET_PROCESSO':
-      console.log(action.payload)
+
       return {
         ...state,
         processo: action.payload,
