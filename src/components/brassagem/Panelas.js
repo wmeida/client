@@ -13,7 +13,7 @@ const Panelas = ({ panelas, dadospanelas }) => {
   return (
     < >
       <Row justify="space-around">
-        {dadospanelas.filter((panela) => {
+        {panelas.filter((panela) => {
           //console.log(panela)
           return panela.habilitada === true
 

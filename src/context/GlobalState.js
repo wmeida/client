@@ -46,8 +46,29 @@ export const GlobalProvider = ({ children }) => {
     //   config: { headers: { 'Content-Type': 'application/json' } }
     // })
     axios.put(`http://192.168.0.83:3333/panelas`, {
+      "modo": "manual",
       "id": id,
       "potencia": potencia
+
+    });
+
+
+  }
+
+
+  async function alterarTemperaturaPanela(id, temperatura, tempo) {
+    console.log("alterando temperatura e tempo da panela", id, temperatura, tempo)
+    // axios({
+    //   method: 'put',
+    //   url: 'http://192.168.0.83:3333/panelas',
+    //   data: id,
+    //   config: { headers: { 'Content-Type': 'application/json' } }
+    // })
+    axios.put(`http://192.168.0.83:3333/panelas`, {
+      "modo": "auto",
+      "id": id,
+      "temperatura": temperatura,
+      "tempo": tempo
 
     });
 
@@ -114,7 +135,7 @@ export const GlobalProvider = ({ children }) => {
 
 
         sensores: state.sensores,
-        getSensores, updatePanela, updateBomba, updateBuzzer, panelaspanelas: state.panelaspanelas, getPanelasPanelas, config: state.config, ligarPanela, getConfig, alterarPotenciaPanela
+        getSensores, updatePanela, updateBomba, updateBuzzer, panelaspanelas: state.panelaspanelas, getPanelasPanelas, config: state.config, ligarPanela, getConfig, alterarPotenciaPanela, alterarTemperaturaPanela
       }}
     >
       {children}
