@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 export default (state, action) => {
-  //console.log(action.payload)
+  ////console.log(action.payload)
   switch (action.type) {
 
     case 'GET_PANELAS':
@@ -12,7 +12,7 @@ export default (state, action) => {
       };
 
     case 'GET_PANELASPANELAS':
-      console.log(action.payload)
+      //console.log(action.payload)
       return {
         ...state,
         panelaspanelas: action.payload,
@@ -35,7 +35,7 @@ export default (state, action) => {
         sensores: action.payload,
       };
     case 'GET_CONFIG':
-      //console.log('configall', action.payload)
+      ////console.log('configall', action.payload)
       return {
         ...state,
         config: action.payload,

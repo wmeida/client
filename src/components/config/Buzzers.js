@@ -3,7 +3,7 @@ import Buzzer from './Buzzer'
 
 
 const Buzzers = (buzzers) => {
-  //console.log(buzzers.buzzers)
+  ////console.log(buzzers.buzzers)
 
   return (
     <div >

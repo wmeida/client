@@ -39,22 +39,22 @@ const PanelaConfig = ({ panela, onUpdate }) => {
   const [sensor, setSensor] = useState(panela.sensor);
   const handleChangeHabilitada = (event) => {
     setHabilitada(event.target.checked);
-    ////console.log(panela.habilitada);
+    //////console.log(panela.habilitada);
   };
 
   const handleChangeTempoffset = (event) => {
     setTempoffset(+(event.target.value));
-    ////console.log(panela.habilitada);
+    //////console.log(panela.habilitada);
   };
 
   const handleChangePwmFreq = (event) => {
     setPwmfreq(+(event.target.value));
-    //console.log(event.target.name);
+    ////console.log(event.target.name);
   };
 
   const handleChangeSensor = (event) => {
     setSensor(event.target.value);
-    ////console.log(panela.habilitada);
+    //////console.log(panela.habilitada);
   };
 
   const salvarConfig = (event) => {
@@ -70,7 +70,7 @@ const PanelaConfig = ({ panela, onUpdate }) => {
 
     updatePanela(event.target.id, p)
     //setSensor(event.target.checked);
-    //console.log(event.target.id, habilitada, pwmfreq, tempoffset, sensor);
+    ////console.log(event.target.id, habilitada, pwmfreq, tempoffset, sensor);
   };
   return (
     <>

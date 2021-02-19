@@ -10,7 +10,7 @@ import Panelas from './Panelas'
 const { Step } = Steps;
 
 const Processo = ({ processo, panelas, dadospanelas }) => {
-  // console.log('pr', processo)
+  // //console.log('pr', processo)
   // const [isModalVisible, setIsModalVisible] = useState(false);
 
   // const showModal = () => {

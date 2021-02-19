@@ -3,7 +3,7 @@ import Bomba from './Bomba'
 
 
 const Bombas = (bombas) => {
-  //console.log(bombas.bombas)
+  ////console.log(bombas.bombas)
 
   return /*(
     <div style={{ margin: 20, padding: 20 }}>

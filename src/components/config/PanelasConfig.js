@@ -8,7 +8,7 @@ import { useState } from 'react';
 const PanelasConfig = ({ panelas, onUpdate, sensores }) => {
 
   const handleChange = (event) => {
-    ////console.log(event.target);
+    //////console.log(event.target);
   };
   return (
 

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Row, Col, Button, Modal, Slider, Badge, Tag } from 'antd';
-import { Statistic, Card, Progress, Divider } from 'antd';
+import { Statistic, Card, Progress, Divider, Switch } from 'antd';
 
 import {
   EditOutlined,
@@ -34,14 +34,14 @@ function Panela({ panela }) {
 
   const marks2 = {
     50: '50C',
-    63: '63C',
+
     67: '67C',
     76: '76C',
     100: '100C',
   };
 
   const marks3 = {
-    15: '30min',
+    10: '10min',
     30: '30min',
     60: '60min',
     90: '90min',
@@ -57,13 +57,13 @@ function Panela({ panela }) {
   const handlePotencia = () => {
     alterarPotenciaPanela(panela.id, potenciaDesejada);
     setIsModalVisible(false);
-    console.log(potenciaDesejada);
+    //console.log(potenciaDesejada);
   };
 
   const handleTemperatura = () => {
     alterarTemperaturaPanela(panela.id, temperaturaDesejada, tempoDesejado);
     setIsModalTempVisible(false);
-    console.log(potenciaDesejada);
+    //console.log(potenciaDesejada);
   };
 
   const onChange = (value) => {
@@ -86,9 +86,13 @@ function Panela({ panela }) {
     setIsModalTempVisible(false);
   };
 
-  //console.log(panela)
+  const onOff = () => {
+    ligarPanela(panela.id, !panela.estado)
+  }
 
-  const { alterarPotenciaPanela, alterarTemperaturaPanela } = useContext(
+  ////console.log(panela)
+
+  const { alterarPotenciaPanela, alterarTemperaturaPanela, ligarPanela } = useContext(
     GlobalContext
   );
 
@@ -97,7 +101,7 @@ function Panela({ panela }) {
       <Card
         title={panela.nome}
         bordered
-        extra={<Button type="primary">Ligar</Button>}
+        extra={<Switch checked={panela.estado} onChange={onOff} />}
         style={{
           backgroundColor: '#fff',
           border: 2,
@@ -165,12 +169,17 @@ function Panela({ panela }) {
         onOk={handleTemperatura}
         onCancel={handleCancelTemp}
       >
+        <h3>Temperatura</h3>
         <Slider
+          min={30}
+          max={100}
           marks={marks2}
           step={1}
           defaultValue={temperaturaDesejada}
           onChange={onChangeTemp}
         />
+        <Divider />
+        <h3>Tempo</h3>
         <Slider
           marks={marks3}
           step={1}

@@ -9,12 +9,12 @@ import 'antd/dist/antd.css';
 
 const Panelas = ({ panelas, dadospanelas }) => {
   //const classes = useStyles()
-  //console.log(panelas)
+  ////console.log(panelas)
   return (
     < >
       <Row justify="space-around">
         {panelas.filter((panela) => {
-          //console.log(panela)
+          ////console.log(panela)
           return panela.habilitada === true
 
         }).map((panela) =>

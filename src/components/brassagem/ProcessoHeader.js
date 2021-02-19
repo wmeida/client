@@ -2,7 +2,7 @@ import 'antd/dist/antd.css';
 import { PageHeader, Radio } from 'antd';
 
 const ProcessoHeader = ({ processo }) => {
-  //console.log('processo', processo)
+  ////console.log('processo', processo)
   return (
     <PageHeader
       ghost={false}

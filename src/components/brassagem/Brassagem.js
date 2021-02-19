@@ -27,10 +27,10 @@ const Brassagem = () => {
   } = useContext(GlobalContext);
   const [panelas, setPanelas] = useState([])
   socket.on("panelas", (pan) => {
-    //console.log("Chegou panelas", pan)
+    ////console.log("Chegou panelas", pan)
     setPanelas(pan)
-    console.log('cfgpanelas', cfgpanelas)
-    console.log('pan', pan)
+    //console.log('cfgpanelas', cfgpanelas)
+    //console.log('pan', pan)
   })
   useEffect(() => {
     getConfig();

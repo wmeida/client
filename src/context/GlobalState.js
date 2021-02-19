@@ -32,13 +32,13 @@ export const GlobalProvider = ({ children }) => {
   }
 
   async function updatePanela(id, pan) {
-    //console.log("updating panela", id, pan)
+    ////console.log("updating panela", id, pan)
     await axios.put(`http://192.168.0.83:3333/panelas/${parseInt(id)}`, pan);
 
 
   }
   async function alterarPotenciaPanela(id, potencia) {
-    console.log("alterando potencia da panela", id, potencia)
+    //console.log("alterando potencia da panela", id, potencia)
     // axios({
     //   method: 'put',
     //   url: 'http://192.168.0.83:3333/panelas',
@@ -57,7 +57,7 @@ export const GlobalProvider = ({ children }) => {
 
 
   async function alterarTemperaturaPanela(id, temperatura, tempo) {
-    console.log("alterando temperatura e tempo da panela", id, temperatura, tempo)
+    //console.log("alterando temperatura e tempo da panela", id, temperatura, tempo)
     // axios({
     //   method: 'put',
     //   url: 'http://192.168.0.83:3333/panelas',
@@ -76,10 +76,11 @@ export const GlobalProvider = ({ children }) => {
   }
 
 
-  async function ligarPanela(id) {
-    console.log("ligando panela", id)
-    await axios.put(`http://192.168.0.83:3333/panelas/ligar/${parseInt(id)}`, {
-      action: 'pwm'
+  async function ligarPanela(id, ligar) {
+    console.log("ligando panela", id, ligar)
+    await axios.put(`http://192.168.0.83:3333/panelas/ligar`, {
+      'id': id,
+      'ligar': ligar
     });
 
 
@@ -87,7 +88,7 @@ export const GlobalProvider = ({ children }) => {
 
 
   async function updateBomba(id, bom) {
-    //console.log("updating bomba", id, bom)
+    ////console.log("updating bomba", id, bom)
     await axios.put(`http://192.168.0.83:3333/bombas/${parseInt(id)}`, bom);
 
 
@@ -96,7 +97,7 @@ export const GlobalProvider = ({ children }) => {
 
 
   async function updateBuzzer(id, buz) {
-    //console.log("updating buzzer", id, buz)
+    ////console.log("updating buzzer", id, buz)
     await axios.put(`http://192.168.0.83:3333/buzzers/${parseInt(id)}`, buz);
 
 
@@ -113,7 +114,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function getConfig() {
     const res = await axios.get('http://192.168.0.83:3333/config');
-    //console.log(res.data.processo)
+    ////console.log(res.data.processo)
     dispatch({
       type: 'GET_CONFIG',
       payload: res.data,
