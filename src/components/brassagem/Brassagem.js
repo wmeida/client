@@ -19,6 +19,7 @@ const Brassagem = () => {
   const {
     cfgprocesso,
     cfgpanelas,
+    cfgbombas,
 
     getConfig,
 
@@ -49,7 +50,7 @@ const Brassagem = () => {
   return (
     <>
       <ProcessoHeader processo={cfgprocesso} />
-      <Processo processo={cfgprocesso} panelas={cfgpanelas} dadospanelas={panelas} />
+      <Processo processo={cfgprocesso} panelas={cfgpanelas} dadospanelas={panelas} bombas={cfgbombas} />
 
       {/* <Row gutter={12} style={{ margin: "20", padding: "20", background: "#000" }}>
         <Col xs={24} lg={9}>

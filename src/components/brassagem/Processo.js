@@ -9,7 +9,7 @@ import Panelas from './Panelas'
 
 const { Step } = Steps;
 
-const Processo = ({ processo, panelas, dadospanelas }) => {
+const Processo = ({ processo, panelas, dadospanelas, bombas }) => {
   // //console.log('pr', processo)
   // const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -65,8 +65,10 @@ const Processo = ({ processo, panelas, dadospanelas }) => {
 
 
     return (
-      <Panelas panelas={panelas, dadospanelas} />
-
+      <>
+        <Panelas panelas={panelas, dadospanelas} />
+        <Bombas bombas={bombas} />
+      </>
     );
 
 

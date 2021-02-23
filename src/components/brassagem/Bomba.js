@@ -12,118 +12,118 @@ import { GlobalContext } from '../../context/GlobalState';
 
 const style = { padding: '30px' };
 
-function Panela({ panela }) {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isModalTempVisible, setIsModalTempVisible] = useState(false);
-  const [potenciaDesejada, setPotenciaDesejada] = useState(0);
-  const [temperaturaDesejada, setTemperaturaDesejada] = useState(0);
-  const [tempoDesejado, setTempoDesejado] = useState(0);
+function Bomba({ bomba }) {
+  // const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [isModalTempVisible, setIsModalTempVisible] = useState(false);
+  // const [potenciaDesejada, setPotenciaDesejada] = useState(0);
+  // const [temperaturaDesejada, setTemperaturaDesejada] = useState(0);
+  // const [tempoDesejado, setTempoDesejado] = useState(0);
 
-  const marks = {
-    0: '0%',
-    30: '30%',
-    50: '50%',
-    80: '80%',
-    100: {
-      style: {
-        color: '#f50',
-      },
-      label: <strong>100%</strong>,
-    },
-  };
+  // const marks = {
+  //   0: '0%',
+  //   30: '30%',
+  //   50: '50%',
+  //   80: '80%',
+  //   100: {
+  //     style: {
+  //       color: '#f50',
+  //     },
+  //     label: <strong>100%</strong>,
+  //   },
+  // };
 
-  const marks2 = {
-    50: '50C',
+  // const marks2 = {
+  //   50: '50C',
 
-    67: '67C',
-    76: '76C',
-    100: '100C',
-  };
+  //   67: '67C',
+  //   76: '76C',
+  //   100: '100C',
+  // };
 
-  const marks3 = {
-    10: '10min',
-    30: '30min',
-    60: '60min',
-    90: '90min',
-    120: '120min',
-  };
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-  const showModalTemp = () => {
-    setIsModalTempVisible(true);
-  };
+  // const marks3 = {
+  //   10: '10min',
+  //   30: '30min',
+  //   60: '60min',
+  //   90: '90min',
+  //   120: '120min',
+  // };
+  // const showModal = () => {
+  //   setIsModalVisible(true);
+  // };
+  // const showModalTemp = () => {
+  //   setIsModalTempVisible(true);
+  // };
 
-  const handlePotencia = () => {
-    alterarPotenciaPanela(panela.id, potenciaDesejada);
-    setIsModalVisible(false);
-    //console.log(potenciaDesejada);
-  };
+  // const handlePotencia = () => {
+  //   alterarPotenciaPanela(panela.id, potenciaDesejada);
+  //   setIsModalVisible(false);
+  //   //console.log(potenciaDesejada);
+  // };
 
-  const handleTemperatura = () => {
-    alterarTemperaturaPanela(panela.id, temperaturaDesejada, tempoDesejado);
-    setIsModalTempVisible(false);
-    //console.log(potenciaDesejada);
-  };
+  // const handleTemperatura = () => {
+  //   alterarTemperaturaPanela(panela.id, temperaturaDesejada, tempoDesejado);
+  //   setIsModalTempVisible(false);
+  //   //console.log(potenciaDesejada);
+  // };
 
-  const onChange = (value) => {
-    setPotenciaDesejada(value);
-  };
+  // const onChange = (value) => {
+  //   setPotenciaDesejada(value);
+  // };
 
-  const onChangeTemp = (value) => {
-    setTemperaturaDesejada(value);
-  };
+  // const onChangeTemp = (value) => {
+  //   setTemperaturaDesejada(value);
+  // };
 
-  const onChangeTempo = (value) => {
-    setTempoDesejado(value);
-  };
+  // const onChangeTempo = (value) => {
+  //   setTempoDesejado(value);
+  // };
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+  // const handleCancel = () => {
+  //   setIsModalVisible(false);
+  // };
 
-  const handleCancelTemp = () => {
-    setIsModalTempVisible(false);
-  };
+  // const handleCancelTemp = () => {
+  //   setIsModalTempVisible(false);
+  // };
 
-  const onOff = () => {
-    ligarPanela(panela.id, !panela.estado);
-  };
+  // const onOff = () => {
+  //   ligarPanela(panela.id, !panela.estado);
+  // };
 
-  function secondsToHms(seconds) {
-    if (!seconds) return '';
+  // function secondsToHms(seconds) {
+  //   if (!seconds) return '';
 
-    let duration = seconds;
-    let hours = duration / 3600;
-    duration = duration % 3600;
+  //   let duration = seconds;
+  //   let hours = duration / 3600;
+  //   duration = duration % 3600;
 
-    let min = parseInt(duration / 60);
-    duration = duration % 60;
+  //   let min = parseInt(duration / 60);
+  //   duration = duration % 60;
 
-    let sec = parseInt(duration);
+  //   let sec = parseInt(duration);
 
-    if (sec < 10) {
-      sec = `0${sec}`;
-    }
-    if (min < 10) {
-      min = `0${min}`;
-    }
+  //   if (sec < 10) {
+  //     sec = `0${sec}`;
+  //   }
+  //   if (min < 10) {
+  //     min = `0${min}`;
+  //   }
 
-    if (parseInt(hours, 10) > 0) {
-      return `${parseInt(hours, 10)}h ${min}m ${sec}s`;
-    } else if (min == 0) {
-      return `${sec}s`;
-    } else {
-      return `${min}m ${sec}s`;
-    }
-  }
+  //   if (parseInt(hours, 10) > 0) {
+  //     return `${parseInt(hours, 10)}h ${min}m ${sec}s`;
+  //   } else if (min == 0) {
+  //     return `${sec}s`;
+  //   } else {
+  //     return `${min}m ${sec}s`;
+  //   }
+  // }
 
-  ////console.log(panela)
+  // ////console.log(panela)
 
   const {
-    alterarPotenciaPanela,
-    alterarTemperaturaPanela,
-    ligarPanela,
+    //alterarPotenciaPanela,
+    //alterarTemperaturaPanela,
+    //ligarPanela,
   } = useContext(GlobalContext);
 
   return (
@@ -222,4 +222,4 @@ function Panela({ panela }) {
   );
 }
 
-export default Panela;
+export default Bomba;
