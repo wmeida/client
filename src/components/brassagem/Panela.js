@@ -87,19 +87,50 @@ function Panela({ panela }) {
   };
 
   const onOff = () => {
-    ligarPanela(panela.id, !panela.estado)
+    ligarPanela(panela.id, !panela.estado);
+  };
+
+  function secondsToHms(seconds) {
+    if (!seconds) return '';
+
+    let duration = seconds;
+    let hours = duration / 3600;
+    duration = duration % 3600;
+
+    let min = parseInt(duration / 60);
+    duration = duration % 60;
+
+    let sec = parseInt(duration);
+
+    if (sec < 10) {
+      sec = `0${sec}`;
+    }
+    if (min < 10) {
+      min = `0${min}`;
+    }
+
+    if (parseInt(hours, 10) > 0) {
+      return `${parseInt(hours, 10)}h ${min}m ${sec}s`;
+    } else if (min == 0) {
+      return `${sec}s`;
+    } else {
+      return `${min}m ${sec}s`;
+    }
   }
 
   ////console.log(panela)
 
-  const { alterarPotenciaPanela, alterarTemperaturaPanela, ligarPanela } = useContext(
-    GlobalContext
-  );
+  const {
+    alterarPotenciaPanela,
+    alterarTemperaturaPanela,
+    ligarPanela,
+  } = useContext(GlobalContext);
 
   return (
     <Col xs={24} lg={6} style={style}>
       <Card
         title={panela.nome}
+        loading={!panela.estado}
         bordered
         extra={<Switch checked={panela.estado} onChange={onOff} />}
         style={{
@@ -142,7 +173,7 @@ function Panela({ panela }) {
         </Row>
         <Divider />
         <Col span={12}>
-          <Statistic title="Tempo" value={panela.tempodesejado} precision={0} />
+          <Statistic title="Tempo" value={panela.tempoDesejado} precision={0} />
           <Button style={{ marginTop: 16 }} type="primary">
             Adicionar
           </Button>
