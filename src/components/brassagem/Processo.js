@@ -1,11 +1,7 @@
-
 import { Steps } from 'antd';
 import { PageHeader } from 'antd';
-import Panelas from './Panelas'
-
-
-
-
+import Panelas from './Panelas';
+import Bombas from './Bombas';
 
 const { Step } = Steps;
 
@@ -25,57 +21,44 @@ const Processo = ({ processo, panelas, dadospanelas, bombas }) => {
   //   setIsModalVisible(false);
   // };
 
-  if (processo.modo === "receita") {
-
+  if (processo.modo === 'receita') {
     return (
       <>
-        <PageHeader style={{ background: "#fff" }}>
+        <PageHeader style={{ background: '#fff' }}>
           <Steps current={2} percent={60}>
-            <Step title="Mostura" subTitle="Left 00:00:08" description="Descrição da mostura" />
-            <Step title="Filtragem / Sparge" subTitle="Left 00:00:08" description="Descrição" />
-            <Step title="Fervura" subTitle="Left 00:00:08" description="Descrição da fervura" />
+            <Step
+              title="Mostura"
+              subTitle="Left 00:00:08"
+              description="Descrição da mostura"
+            />
+            <Step
+              title="Filtragem / Sparge"
+              subTitle="Left 00:00:08"
+              description="Descrição"
+            />
+            <Step
+              title="Fervura"
+              subTitle="Left 00:00:08"
+              description="Descrição da fervura"
+            />
           </Steps>
         </PageHeader>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        { /* <Modal title="Editar" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        {/* <Modal title="Editar" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
           <p>Some contents...</p>
           <p>Some contents...</p>
           <p>Some contents...</p>
         </Modal> */}
       </>
     );
-
-  }
-  else {
-
-
+  } else {
     return (
       <>
-        <Panelas panelas={panelas, dadospanelas} />
+        <Panelas panelas={(panelas, dadospanelas)} />
         <Bombas bombas={bombas} />
       </>
     );
-
-
-
   }
-}
-
-
+};
 
 export default Processo;

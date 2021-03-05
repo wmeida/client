@@ -1,27 +1,20 @@
 import React from 'react';
 import PanelaConfig from './PanelaConfig';
+import { Grid } from 'antd';
 
-import { useState } from 'react';
+//import { useState } from 'react';
 
+const PanelasConfig = ({ config, sensores }) => {
+  // const handleChange = (event) => {
+  console.log(sensores.sensores);
+  // };
 
-
-const PanelasConfig = ({ panelas, onUpdate, sensores }) => {
-
-  const handleChange = (event) => {
-    //////console.log(event.target);
-  };
   return (
-
-    <div style={{ margin: 20, padding: 20 }}>
-      {/* <Grid container spacing={40} justify="center">
-        {panelas.map((panela) => (
-          <PanelaConfig panela={panela} />
-
-        ))
-        }
-      </Grid> */}
-
-    </div >
+    <>
+      {config.panelas.map((panela) => (
+        <PanelaConfig panela={panela} />
+      ))}
+    </>
   );
 };
 

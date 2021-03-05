@@ -6,17 +6,16 @@ const ProcessoHeader = ({ processo }) => {
   return (
     <PageHeader
       ghost={false}
-
       title="Modo"
-
       extra={[
         <Radio.Group defaultValue="a" buttonStyle="solid">
           <Radio.Button value="a">Manual</Radio.Button>
-          <Radio.Button value="b">Auto</Radio.Button>
-        </Radio.Group>
+          <Radio.Button value="b" disabled>
+            Auto
+          </Radio.Button>
+        </Radio.Group>,
       ]}
     >
-
       <small>{processo.modo}</small>
     </PageHeader>
     // <AppBar position="static">

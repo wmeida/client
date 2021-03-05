@@ -1,23 +1,13 @@
-
-
-import { GlobalContext } from '../../context/GlobalState';
-import { useContext } from 'react'
-
+//import { GlobalContext } from '../../context/GlobalState';
+//import { useContext } from 'react'
 
 const Sensor = ({ sensor }) => {
-  const {
-
-    getSensores
-  } = useContext(GlobalContext);
-
+  console.log('sensor', sensor);
   return (
-    < >
-
-
+    <>
+      <p style={{ color: '#fff' }}>{sensor.temperatura}</p>
     </>
-  )
-}
+  );
+};
 
-
-export default Sensor
-
+export default Sensor;

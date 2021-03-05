@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react';
-import { Row, Col, Button, Modal, Slider, Badge, Tag } from 'antd';
-import { Statistic, Card, Progress, Divider, Switch } from 'antd';
+import React from 'react';
+import { Row, Col, Button } from 'antd';
+import { Card } from 'antd';
+import axios from 'axios';
 
 import {
   EditOutlined,
@@ -8,11 +9,17 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 
-import { GlobalContext } from '../../context/GlobalState';
-
 const style = { padding: '30px' };
 
 function Bomba({ bomba }) {
+  async function ligarBomba(id, modo) {
+    console.log('bomba', id, modo);
+    await axios.put(`http://raspberrypi.local:3333/bombas`, {
+      action: 'ligar',
+      id: id,
+      modo: modo,
+    });
+  }
   // const [isModalVisible, setIsModalVisible] = useState(false);
   // const [isModalTempVisible, setIsModalTempVisible] = useState(false);
   // const [potenciaDesejada, setPotenciaDesejada] = useState(0);
@@ -86,9 +93,19 @@ function Bomba({ bomba }) {
   //   setIsModalTempVisible(false);
   // };
 
-  // const onOff = () => {
-  //   ligarPanela(panela.id, !panela.estado);
-  // };
+  const onOff = (e) => {
+    if (e.target.innerText === 'Ligar') {
+      ligarBomba(bomba.id, 1);
+      console.log('Ligar bomba');
+    } else if (e.target.innerText === 'Desligar') {
+      ligarBomba(bomba.id, 0);
+      console.log('Desligar bomba');
+    } else if (e.target.innerText === 'Automatico') {
+      ligarBomba(bomba.id, 2);
+      console.log('Auto bomba');
+    }
+    //ligarBomba(bomba.id, e.target.id);
+  };
 
   // function secondsToHms(seconds) {
   //   if (!seconds) return '';
@@ -120,25 +137,19 @@ function Bomba({ bomba }) {
 
   // ////console.log(panela)
 
-  const {
-    //alterarPotenciaPanela,
-    //alterarTemperaturaPanela,
-    //ligarPanela,
-  } = useContext(GlobalContext);
+  //console.log('bomba', bomba);
 
   return (
     <Col xs={24} lg={6} style={style}>
       <Card
-        title={panela.nome}
-        loading={!panela.estado}
+        title={bomba.nome}
         bordered
-        extra={<Switch checked={panela.estado} onChange={onOff} />}
         style={{
-          backgroundColor: '#fff',
           border: 2,
           borderStyle: 'solid',
           borderWidth: 3,
           borderColor: '#000',
+          fontWeight: 'bold',
         }}
         actions={[
           <SettingOutlined key="setting" />,
@@ -148,78 +159,25 @@ function Bomba({ bomba }) {
       >
         <Row justify="center">
           <Col span={12}>
-            <Statistic
-              title="Temperatura"
-              value={panela.temperatura}
-              precision={2}
-              valueStyle={{ color: '#3f8600' }}
-              suffix="C"
-            />
-            <Tag color="processing" onClick={showModalTemp}>
-              SP: {panela.tempdesejada}C
-            </Tag>
-          </Col>
-
-          <Col span={12}>
-            <Progress
-              type="circle"
-              percent={panela.potencia}
-              width={80}
-              onClick={showModal}
+            <Button id="0" type="danger" block onClick={onOff}>
+              Desligar
+            </Button>
+            <Button
+              id="1"
+              block
+              type="primary"
+              onClick={onOff}
+              style={{ marginTop: 15 }}
             >
-              Potencia
-            </Progress>
+              Ligar
+            </Button>
+            <Button id="2" block onClick={onOff} style={{ marginTop: 15 }}>
+              Automatico
+            </Button>
           </Col>
         </Row>
-        <Divider />
-        <Col span={12}>
-          <Statistic title="Tempo" value={panela.tempodesejado} precision={0} />
-          <Button style={{ marginTop: 16 }} type="primary">
-            Adicionar
-          </Button>
-        </Col>
       </Card>
-      <Modal
-        title="Alterar potencia"
-        visible={isModalVisible}
-        onOk={handlePotencia}
-        onCancel={handleCancel}
-        onAuto={handleTemperatura}
-      >
-        <Slider
-          marks={marks}
-          step={1}
-          defaultValue={potenciaDesejada}
-          onChange={onChange}
-        />
-      </Modal>
-
-      <Modal
-        title="Alterar Temperatura"
-        visible={isModalTempVisible}
-        onOk={handleTemperatura}
-        onCancel={handleCancelTemp}
-      >
-        <h3>Temperatura</h3>
-        <Slider
-          min={30}
-          max={100}
-          marks={marks2}
-          step={1}
-          defaultValue={temperaturaDesejada}
-          onChange={onChangeTemp}
-        />
-        <Divider />
-        <h3>Tempo</h3>
-        <Slider
-          marks={marks3}
-          step={1}
-          defaultValue={tempoDesejado}
-          onChange={onChangeTempo}
-        />
-      </Modal>
     </Col>
   );
 }
-
 export default Bomba;

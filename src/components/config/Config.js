@@ -1,23 +1,34 @@
-import { useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import Sensores from './Sensores.js';
 import PanelasConfig from './PanelasConfig.js';
-import Bombas from './Bombas'
-import Buzzers from './Buzzers'
+import Bombas from './Bombas';
+import Buzzers from './Buzzers';
 
-import { GlobalContext } from '../../context/GlobalState';
+//import { GlobalContext } from '../../context/GlobalState';
 
-const Config = () => {
-  const {
-    panelas,
-    getPanelas,
-    bombas,
-    getBombas,
-    buzzers,
-    getBuzzers,
-    sensores,
-    getSensores
-  } = useContext(GlobalContext);
+const Config = ({ sensores, config }) => {
+  //console.log('sensores', sensores);
+  //console.log('panelas', panelas);
+  // console.log('bombas', bombas);
+  // console.log('processo', processo);
+  console.log('config', config);
+  // console.log('buzzers', buzzers);
+
+  useEffect(() => {
+    //getSensores();
+    //getConfig();
+  }, []);
+  // const {
+  //   panelas,
+
+  //   bombas,
+
+  //   buzzers,
+
+  //   sensores,
+  // } = useContext(GlobalContext);
 
   // const updatePanelas = (id) => {
   //   panelas.map((conf) => {
@@ -27,24 +38,20 @@ const Config = () => {
   //     return conf;
   //   });
   // };
-  const salvarConfig = () => { };
+  // const salvarConfig = () => { };
 
-  useEffect(() => {
-    getPanelas();
-    getBombas();
-    getBuzzers();
-    getSensores();
-  }, []);
+  // useEffect(() => {
+  //   getPanelas();
+  //   getBombas();
+  //   getBuzzers();
+  //   getSensores();
+  // }, []);
 
   return (
     <>
-
-
+      <PanelasConfig config={config} sensores={sensores} />
       <Sensores sensores={sensores} />
-      <PanelasConfig panelas={panelas} />
-      <Bombas bombas={bombas} />
-      <Buzzers buzzers={buzzers} />
-
+      <Bombas bombas={config.bombas} />
     </>
   );
 };

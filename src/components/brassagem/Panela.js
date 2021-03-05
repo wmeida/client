@@ -1,14 +1,13 @@
-import React, { useContext, useState } from 'react';
-import { Row, Col, Button, Modal, Slider, Badge, Tag } from 'antd';
+import React, { useState } from 'react';
+import { Row, Col, Button, Modal, Slider, Tag } from 'antd';
 import { Statistic, Card, Progress, Divider, Switch } from 'antd';
+import axios from 'axios';
 
 import {
   EditOutlined,
   EllipsisOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
-
-import { GlobalContext } from '../../context/GlobalState';
 
 const style = { padding: '30px' };
 
@@ -18,6 +17,64 @@ function Panela({ panela }) {
   const [potenciaDesejada, setPotenciaDesejada] = useState(0);
   const [temperaturaDesejada, setTemperaturaDesejada] = useState(0);
   const [tempoDesejado, setTempoDesejado] = useState(0);
+
+  async function alterarPotenciaPanela(id, potencia) {
+    //console.log("alterando potencia da panela", id, potencia)
+    // axios({
+    //   method: 'put',
+    //   url: 'http://192.168.0.83:3333/panelas',
+    //   data: id,
+    //   config: { headers: { 'Content-Type': 'application/json' } }
+    // })
+    axios.put(`http://raspberrypi.local:3333/panelas`, {
+      action: 'changeMode',
+      modo: 'manual',
+      id: id,
+      potencia: potencia,
+    });
+  }
+
+  async function alterarTemperaturaPanela(id, temperatura, tempo) {
+    //console.log("alterando temperatura e tempo da panela", id, temperatura, tempo)
+    // axios({
+    //   method: 'put',
+    //   url: 'http://192.168.0.83:3333/panelas',
+    //   data: id,
+    //   config: { headers: { 'Content-Type': 'application/json' } }
+    // })
+    axios.put(`http://raspberrypi.local:3333/panelas`, {
+      action: 'changeMode',
+      modo: 'auto',
+      id: id,
+      temperatura: temperatura,
+      tempo: tempo,
+    });
+  }
+
+  async function ligarPanela(id, ligar) {
+    console.log('ligando panela', id, ligar);
+    await axios.put(`http://raspberrypi.local:3333/panelas`, {
+      action: 'ligar',
+      id: id,
+      ligar: ligar,
+    });
+  }
+
+  async function skipTimePanela(id) {
+    console.log('ligando panela', id);
+    await axios.put(`http://raspberrypi.local:3333/panelas`, {
+      action: 'skipTime',
+      id: id,
+    });
+  }
+
+  async function addTimePanela(id) {
+    console.log('adicionando tempo panela', id);
+    await axios.put(`http://raspberrypi.local:3333/panelas`, {
+      action: 'addTime',
+      id: id,
+    });
+  }
 
   const marks = {
     0: '0%',
@@ -90,6 +147,14 @@ function Panela({ panela }) {
     ligarPanela(panela.id, !panela.estado);
   };
 
+  const addTime = () => {
+    addTimePanela(panela.id);
+  };
+
+  const skipTime = () => {
+    skipTimePanela(panela.id);
+  };
+
   function secondsToHms(seconds) {
     if (!seconds) return '';
 
@@ -111,7 +176,7 @@ function Panela({ panela }) {
 
     if (parseInt(hours, 10) > 0) {
       return `${parseInt(hours, 10)}h ${min}m ${sec}s`;
-    } else if (min == 0) {
+    } else if (min === 0) {
       return `${sec}s`;
     } else {
       return `${min}m ${sec}s`;
@@ -120,14 +185,8 @@ function Panela({ panela }) {
 
   ////console.log(panela)
 
-  const {
-    alterarPotenciaPanela,
-    alterarTemperaturaPanela,
-    ligarPanela,
-  } = useContext(GlobalContext);
-
   return (
-    <Col xs={24} lg={6} style={style}>
+    <Col xs={24} lg={8} style={style}>
       <Card
         title={panela.nome}
         loading={!panela.estado}
@@ -173,9 +232,16 @@ function Panela({ panela }) {
         </Row>
         <Divider />
         <Col span={12}>
-          <Statistic title="Tempo" value={panela.tempodesejado} precision={0} />
-          <Button style={{ marginTop: 16 }} type="primary">
+          <Statistic
+            title="Tempo restante"
+            value={secondsToHms(panela.tempodesejado)}
+            precision={0}
+          />
+          <Button style={{ marginTop: 16 }} type="primary" onClick={addTime}>
             Adicionar
+          </Button>
+          <Button style={{ marginTop: 16 }} type="danger" onClick={skipTime}>
+            Skip
           </Button>
         </Col>
       </Card>

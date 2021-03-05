@@ -1,22 +1,23 @@
 import 'antd/dist/antd.css';
 import { PageHeader, Button } from 'antd';
-const Header = (props) => {
+const Header = ({ setPagina }) => {
   return (
     <PageHeader
       ghost={false}
-
       title="Heisenbier"
       subTitle="Your own beer"
       extra={[
-        <Button key="3" href="/">Home</Button>,
-        <Button key="2" href="/brassagem">Brassagem</Button>,
-        <Button key="1" href="/config" >
+        <Button key="3" onClick={() => setPagina(0)}>
+          Home
+        </Button>,
+        <Button key="2" onClick={() => setPagina(2)}>
+          Brassagem
+        </Button>,
+        <Button key="1" onClick={() => setPagina(1)}>
           Settings
         </Button>,
       ]}
-    >
-
-    </PageHeader>
+    ></PageHeader>
     // <AppBar position="static">
     //   <Toolbar>
     //     <Typography variant="h6" href="/">
