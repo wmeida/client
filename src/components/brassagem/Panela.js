@@ -199,11 +199,6 @@ function Panela({ panela }) {
           borderWidth: 3,
           borderColor: '#000',
         }}
-        actions={[
-          <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />,
-        ]}
       >
         <Row justify="center">
           <Col span={12}>

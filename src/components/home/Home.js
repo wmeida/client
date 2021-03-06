@@ -1,14 +1,11 @@
 import React from 'react';
-import { useEffect, useContext } from 'react';
-import { Button } from 'antd';
-import { GlobalContext } from '../../context/GlobalState';
-import Brassagem from '../brassagem/Brassagem';
-import Config from '../config/Config';
+import { useEffect } from 'react';
 
-const Home = ({ pagina, setPagina, getConfig, getSensores }) => {
+const Home = ({ pagina, setPagina, getConfig, getSensores, conectado }) => {
   useEffect(() => {
     getConfig();
     getSensores();
+    setInterval(getConfig, 5000);
     //socket.connect()
     //getBombas();
     // const interval = setInterval(async () => {

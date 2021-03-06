@@ -1,54 +1,87 @@
-//import React, { useState, useContext } from 'react';
-import { Form, Input, Button, InputNumber, Switch } from 'antd';
+import { useState } from 'react';
+import { Form, Input, Button, InputNumber, Switch, Col, Card } from 'antd';
 //import { GlobalContext } from '../../context/GlobalState';
+import axios from 'axios';
 
 const Bomba = ({ bomba }) => {
-  //const { updateBomba } = useContext(GlobalContext);
-  //const [pwmfreq, setPwmFreq] = useState(bomba.pwmfreq);
-  // const handleChangePwmFreq = (event) => {
-  //   setPwmFreq(+(event.target.value));
+  const [habilitada, setHabilitada] = useState(bomba.habilitada);
+  const [nome, setNome] = useState(bomba.nome);
+  const [pwmfreq, setPwmfreq] = useState(bomba.pwmfreq);
+  const [panela, setPanela] = useState(bomba.sensor);
+  async function updateBomba(id, bom) {
+    ////console.log("updating bomba", id, bom)
+    await axios.put(`http://raspberrypi.local:3333/bombas`, {
+      action: 'update',
+      id: id,
+      bom,
+    });
+  }
 
-  // };
+  const update = () => {
+    const bomb = {
+      id: bomba.id,
+      nome: nome,
+      habilitada: habilitada,
+      pino: bomba.pino,
+      pwmfreq: pwmfreq,
+      panela: panela,
+    };
 
-  // // const salvarConfig = (event) => {
-  // //   const b = {
-  // //     "id": +(event.target.id),
-  // //     "nome": bomba.nome,
-  // //     "pino": bomba.pino,
-  // //     "pwmfreq": pwmfreq,
+    updateBomba(bomba.id, bomb);
+  };
 
-  // //   }
-
-  //   updateBomba(event.target.id, b)
-  // }
   return (
     <div>
-      <Form
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 14 }}
-        layout="horizontal"
-        style={{ background: '#fff' }}
-      >
-        <Form.Item label={bomba.nome}></Form.Item>
-        <Form.Item label="Habilitada">
-          <Switch defaultChecked={bomba.habilitada} />
-        </Form.Item>
-        <Form.Item label="Nome">
-          <Input placeholder={bomba.nome} />
-        </Form.Item>
+      <Col xs={24} lg={24}>
+        <Card
+          title={bomba.nome}
+          bordered
+          style={{
+            backgroundColor: '#fff',
+            border: 2,
+            borderStyle: 'solid',
+            borderWidth: 3,
+            borderColor: '#000',
+          }}
+        >
+          <Form.Item label={bomba.nome}></Form.Item>
+          <Form.Item label="Habilitada">
+            <Switch
+              defaultChecked={bomba.habilitada}
+              onChange={(e) => setHabilitada(e)}
+            />
+          </Form.Item>
+          <Form.Item label="Nome">
+            <Input
+              placeholder={bomba.nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
+          </Form.Item>
 
-        <Form.Item label="Frequencia PWM">
-          <InputNumber placeholder={bomba.pwmfreq} />
-        </Form.Item>
+          <Form.Item label="Frequencia PWM">
+            <InputNumber
+              placeholder={bomba.pwmfreq}
+              onChange={(e) => setPwmfreq(e)}
+              min={0}
+              max={200}
+            />
+          </Form.Item>
 
-        <Form.Item label="Panela">
-          <InputNumber placeholder={bomba.panela} />
-        </Form.Item>
-        <Form.Item label="Actions">
-          <Button type="primary">Salvar</Button>
-          <Button type="danger">Cancelar</Button>
-        </Form.Item>
-      </Form>
+          <Form.Item label="Panela">
+            <InputNumber
+              placeholder={bomba.panela}
+              onChange={(e) => setPanela(e)}
+              min={0}
+              max={2}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" onClick={update}>
+              Salvar
+            </Button>
+          </Form.Item>
+        </Card>
+      </Col>
     </div>
   );
 };

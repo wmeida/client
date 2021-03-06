@@ -1,6 +1,6 @@
 import React from 'react';
 import PanelaConfig from './PanelaConfig';
-import { Grid } from 'antd';
+import { Row } from 'antd';
 
 //import { useState } from 'react';
 
@@ -11,9 +11,11 @@ const PanelasConfig = ({ config, sensores }) => {
 
   return (
     <>
-      {config.panelas.map((panela) => (
-        <PanelaConfig panela={panela} />
-      ))}
+      <Row>
+        {config.panelas.map((panela) => (
+          <PanelaConfig panela={panela} />
+        ))}
+      </Row>
     </>
   );
 };

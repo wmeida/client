@@ -1,23 +1,29 @@
 import 'antd/dist/antd.css';
-import { PageHeader, Button } from 'antd';
-const Header = ({ setPagina }) => {
+import { PageHeader, Button, Alert } from 'antd';
+const Header = ({ setPagina, conectado }) => {
   return (
-    <PageHeader
-      ghost={false}
-      title="Heisenbier"
-      subTitle="Your own beer"
-      extra={[
-        <Button key="3" onClick={() => setPagina(0)}>
-          Home
-        </Button>,
-        <Button key="2" onClick={() => setPagina(2)}>
-          Brassagem
-        </Button>,
-        <Button key="1" onClick={() => setPagina(1)}>
-          Settings
-        </Button>,
-      ]}
-    ></PageHeader>
+    <>
+      <PageHeader
+        ghost={false}
+        title="Heisenbier"
+        subTitle="Your own beer"
+        extra={[
+          <Button key="3" onClick={() => setPagina(0)} disabled={!conectado}>
+            Home
+          </Button>,
+          <Button key="2" onClick={() => setPagina(2)} disabled={!conectado}>
+            Brassagem
+          </Button>,
+          <Button key="1" onClick={() => setPagina(1)} disabled={!conectado}>
+            Settings
+          </Button>,
+        ]}
+      ></PageHeader>
+      <Alert
+        message={conectado ? 'Conectado' : 'Desconectado'}
+        type={conectado ? 'success' : 'warning'}
+      />
+    </>
     // <AppBar position="static">
     //   <Toolbar>
     //     <Typography variant="h6" href="/">

@@ -28,16 +28,6 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
-  async function updateBomba(id, bom) {
-    ////console.log("updating bomba", id, bom)
-    await axios.put(hardIp + `/bombas/${parseInt(id)}`, bom);
-  }
-
-  async function updateBuzzer(id, buz) {
-    ////console.log("updating buzzer", id, buz)
-    await axios.put(hardIp + `/buzzers/${parseInt(id)}`, buz);
-  }
-
   async function getSensores() {
     const res = await axios.get(hardIp + '/sensores');
 
@@ -68,8 +58,6 @@ export const GlobalProvider = ({ children }) => {
         sensores: state.sensores,
         getSensores,
 
-        updateBomba,
-        updateBuzzer,
         panelaspanelas: state.panelaspanelas,
         getPanelasPanelas,
         config: state.config,

@@ -10,14 +10,24 @@ import Home from './components/home/Home';
 
 const App = () => {
   const [pagina, setPagina] = useState(0);
+  const [conectado, setConectado] = useState(false);
   const [config, setConfig] = useState();
   const [sensores, setSensores] = useState();
   async function getConfig() {
-    const res = await axios.get('http://raspberrypi.local:3333/config');
-    ////console.log(res.data.processo)
-    setConfig(res.data);
+    console.log('Tentando conectar');
+    try {
+      const res = await axios.get('http://raspberrypi.local:3333/config', {
+        timeout: 3000,
+      });
+      ////console.log(res.data.processo)
+      setConfig(res.data);
+      setConectado(true);
 
-    console.log('chegou config', config);
+      console.log('chegou config', config);
+    } catch (error) {
+      setConectado(false);
+      console.log(error);
+    }
   }
   async function getSensores() {
     const res = await axios.get('http://raspberrypi.local:3333/sensores');
@@ -30,37 +40,38 @@ const App = () => {
     case 0:
       return (
         <>
-        <Header setPagina={setPagina} />
-        <Home
-          pagina={pagina}
-          setPagina={setPagina}
-          getSensores={getSensores}
-          getConfig={getConfig}
-        />
+          <Header setPagina={setPagina} conectado={conectado} />
+          <Home
+            conectado={conectado}
+            pagina={pagina}
+            setPagina={setPagina}
+            getSensores={getSensores}
+            getConfig={getConfig}
+          />
         </>
       );
     case 1:
       return (
         <>
-        <Header setPagina={setPagina} />
-        <Config
-          config={config.config}
-          sensores={sensores.sensores}
-          getSensores={getSensores}
-          getConfig={getConfig}
-        />
+          <Header setPagina={setPagina} conectado={conectado} />
+          <Config
+            config={config.config}
+            sensores={sensores.sensores}
+            getSensores={getSensores}
+            getConfig={getConfig}
+          />
         </>
       );
     case 2:
       return (
         <>
-        <Header setPagina={setPagina} />
-        <Brassagem
-          config={config.config}
-          sensores={sensores.sensores}
-          getSensores={getSensores}
-          getConfig={getConfig}
-        />
+          <Header setPagina={setPagina} conectado={conectado} />
+          <Brassagem
+            config={config.config}
+            sensores={sensores.sensores}
+            getSensores={getSensores}
+            getConfig={getConfig}
+          />
         </>
       );
     default:

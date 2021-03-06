@@ -1,9 +1,10 @@
 //import { GlobalContext } from '../../context/GlobalState';
-import { Form, Input, Button, InputNumber, Switch } from 'antd';
+import { Form, Input, Button, InputNumber, Switch, Col, Card } from 'antd';
 import { useState } from 'react';
 import axios from 'axios';
 
 const PanelaConfig = ({ panela }) => {
+  const style = { padding: '30px' };
   const [nome, setNome] = useState(panela.nome);
   const [pwmfreq, setPwmfreq] = useState(panela.pwmfreq);
   const [sensor, setSensor] = useState(panela.sensor);
@@ -42,65 +43,94 @@ const PanelaConfig = ({ panela }) => {
   };
   return (
     <div>
-      <Form
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 14 }}
-        layout="horizontal"
-        style={{ background: '#ccc' }}
-        size="small"
-      >
-        <Form.Item label={panela.nome}></Form.Item>
-        <Form.Item label="Habilitada">
-          <Switch
-            defaultChecked={panela.habilitada}
-            onChange={(e) => setHabilitada(e)}
-          />
-        </Form.Item>
-        <Form.Item label="Nome">
-          <Input
-            placeholder={panela.nome}
-            onChange={(e) => setNome(e.target.value)}
-          />
-        </Form.Item>
-        <Form.Item label="Sensor">
-          <Input
-            placeholder={panela.sensor}
-            onChange={(e) => setSensor(e.target.value)}
-          />
-        </Form.Item>
-        <Form.Item label="Offset temperatura">
-          <InputNumber
-            placeholder={panela.tempoffset}
-            onChange={(e) => setTempoffset(e)}
-          />
-        </Form.Item>
-        <Form.Item label="Frequencia PWM">
-          <InputNumber
-            placeholder={panela.pwmfreq}
-            onChange={(e) => setPwmfreq(e)}
-          />
-        </Form.Item>
-        <Form.Item label="kp">
-          <InputNumber placeholder={panela.kp} onChange={(e) => setKp(e)} />
-        </Form.Item>
-        <Form.Item label="ki">
-          <InputNumber placeholder={panela.ki} onChange={(e) => setKi(e)} />
-        </Form.Item>
-        <Form.Item label="kd">
-          <InputNumber placeholder={panela.kd} onChange={(e) => setKd(e)} />
-        </Form.Item>
-        <Form.Item label="Error Array Size">
-          <InputNumber
-            placeholder={panela.errorArraySize}
-            onChange={(e) => setErrorArraySize(e)}
-          />
-        </Form.Item>
-        <Form.Item label="Actions">
-          <Button type="primary" onClick={update}>
-            Salvar
-          </Button>
-        </Form.Item>
-      </Form>
+      <Col style={style}>
+        <Card
+          title={panela.nome}
+          bordered
+          style={{
+            backgroundColor: '#fff',
+            border: 2,
+            borderStyle: 'solid',
+            borderWidth: 3,
+            borderColor: '#000',
+          }}
+        >
+          <Form.Item label={panela.nome}></Form.Item>
+          <Form.Item label="Habilitada">
+            <Switch
+              defaultChecked={panela.habilitada}
+              onChange={(e) => setHabilitada(e)}
+            />
+          </Form.Item>
+          <Form.Item label="Nome">
+            <Input
+              placeholder={panela.nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item label="Sensor">
+            <Input
+              placeholder={panela.sensor}
+              onChange={(e) => setSensor(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item label="Offset temperatura">
+            <InputNumber
+              placeholder={panela.tempoffset}
+              onChange={(e) => setTempoffset(e)}
+              min={0}
+              max={5}
+            />
+          </Form.Item>
+          <Form.Item label="Frequencia PWM">
+            <InputNumber
+              placeholder={panela.pwmfreq}
+              onChange={(e) => setPwmfreq(e)}
+              min={0}
+              max={100}
+            />
+          </Form.Item>
+          <Form.Item label="kp">
+            <InputNumber
+              placeholder={panela.kp}
+              onChange={(e) => setKp(e)}
+              min={0}
+              max={10}
+            />
+          </Form.Item>
+          <Form.Item label="ki">
+            <InputNumber
+              placeholder={panela.ki}
+              onChange={(e) => setKi(e)}
+              min={0}
+              max={2}
+              step={0.1}
+            />
+          </Form.Item>
+          <Form.Item label="kd">
+            <InputNumber
+              placeholder={panela.kd}
+              onChange={(e) => setKd(e)}
+              min={0}
+              max={2}
+              step={0.1}
+            />
+          </Form.Item>
+          <Form.Item label="Error Array Size">
+            <InputNumber
+              placeholder={panela.errorArraySize}
+              onChange={(e) => setErrorArraySize(e)}
+              min={100}
+              max={1000}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" onClick={update}>
+              Salvar
+            </Button>
+          </Form.Item>
+        </Card>
+      </Col>
     </div>
   );
 };
