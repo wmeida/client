@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Row, Col, Button, Modal, Slider, Tag } from 'antd';
-import { Statistic, Card, Progress, Divider, Switch } from 'antd';
+import { Statistic, Card, Progress, Divider, Switch, Spin } from 'antd';
 import axios from 'axios';
+import { CheckOutlined } from '@ant-design/icons'
 
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from '@ant-design/icons';
+
+
 
 const style = { padding: '30px' };
 
@@ -188,10 +186,11 @@ function Panela({ panela }) {
   return (
     <Col xs={24} lg={8} style={style}>
       <Card
+
         title={panela.nome}
         loading={!panela.estado}
         bordered
-        extra={<Switch checked={panela.estado} onChange={onOff} />}
+        extra={[<Switch checked={panela.estado} onChange={onOff} />]}
         style={{
           backgroundColor: '#fff',
           border: 2,
@@ -200,7 +199,21 @@ function Panela({ panela }) {
           borderColor: '#000',
         }}
       >
+        <Card
+          style={{ margin: 5 }}
+          type="inner"
+
+
+        >
+          {panela.modo === 0 ? "Modo potencia" : "Modo automatico"}
+          <Spin spinning={panela.estado === 1 ? true : false} style={{ margin: 16 }} />
+          <p>{secondsToHms(panela.tempodesejado)}</p>
+
+
+        </Card>
+
         <Row justify="center">
+
           <Col span={12}>
             <Statistic
               title="Temperatura"
@@ -227,17 +240,13 @@ function Panela({ panela }) {
         </Row>
         <Divider />
         <Col span={12}>
-          <Statistic
-            title="Tempo restante"
-            value={secondsToHms(panela.tempodesejado)}
-            precision={0}
-          />
-          <Button style={{ marginTop: 16 }} type="primary" onClick={addTime}>
-            Adicionar
-          </Button>
-          <Button style={{ marginTop: 16 }} type="danger" onClick={skipTime}>
-            Skip
-          </Button>
+
+          {panela.modo === 1 && panela.estado == 1 && <Button style={{ marginTop: 16 }} type="primary" onClick={addTime}>
+            Adicionar Tempo
+          </Button>}
+          {panela.estado == 1 && <Button style={{ marginTop: 16 }} type="danger" onClick={skipTime} icon={<CheckOutlined />}>
+            Finalizar etapa
+          </Button>}
         </Col>
       </Card>
       <Modal
