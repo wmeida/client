@@ -17,11 +17,18 @@ const Brassagem = ({ config, sensores }) => {
     getConfig,
   } = useContext(GlobalContext);
   const [panelas, setPanelas] = useState([]);
+  const [processo, setProcesso] = useState([]);
   socket.on('panelas', (pan) => {
     ////console.log("Chegou panelas", pan)
     setPanelas(pan);
     //console.log('cfgpanelas', cfgpanelas)
     //console.log('pan', pan)
+  });
+  socket.on('processo', (pr) => {
+    ////console.log("Chegou panelas", pan)
+    setProcesso(pr);
+    //console.log('cfgpanelas', cfgpanelas)
+    //console.log('processo', pr);
   });
   useEffect(() => {
     //getConfig();
@@ -41,6 +48,7 @@ const Brassagem = ({ config, sensores }) => {
         panelas={config.panelas}
         dadospanelas={panelas}
         bombas={config.bombas}
+        dadosprocesso={processo}
       />
 
       {/* <Row gutter={12} style={{ margin: "20", padding: "20", background: "#000" }}>

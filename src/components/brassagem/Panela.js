@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Row, Col, Button, Modal, Slider, Tag } from 'antd';
-import { Statistic, Card, Progress, Divider, Switch } from 'antd';
+import { Row, Col, Button, Modal, Slider, Popconfirm } from 'antd';
+import { Card, Progress, Divider, Switch, Spin, Avatar, Badge } from 'antd';
 import axios from 'axios';
-
 import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
+  CheckOutlined,
+  ClockCircleOutlined,
+  PlusOutlined,
 } from '@ant-design/icons';
 
 const style = { padding: '30px' };
@@ -19,35 +18,51 @@ function Panela({ panela }) {
   const [tempoDesejado, setTempoDesejado] = useState(0);
 
   async function alterarPotenciaPanela(id, potencia) {
-    //console.log("alterando potencia da panela", id, potencia)
-    // axios({
-    //   method: 'put',
-    //   url: 'http://192.168.0.83:3333/panelas',
-    //   data: id,
-    //   config: { headers: { 'Content-Type': 'application/json' } }
-    // })
-    axios.put(`http://raspberrypi.local:3333/panelas`, {
-      action: 'changeMode',
-      modo: 'manual',
-      id: id,
-      potencia: potencia,
+    // axios.put(`http://raspberrypi.local:3333/panelas`, {
+    //   action: 'changeMode',
+    //   modo: 'manual',
+    //   id: id,
+    //   potencia: potencia,
+    // });
+
+    axios.put(`http://raspberrypi.local:3333/processo`, {
+      //estado,modo,done,potencia,temperatura,tempo
+
+      action: 'addProcessoPanela',
+      dado: {
+        modo: 0,
+        estado: 0,
+        id: id,
+        potencia: potencia,
+        done: false,
+        temperatura: 0,
+        tempo: 0,
+      },
     });
   }
 
   async function alterarTemperaturaPanela(id, temperatura, tempo) {
-    //console.log("alterando temperatura e tempo da panela", id, temperatura, tempo)
-    // axios({
-    //   method: 'put',
-    //   url: 'http://192.168.0.83:3333/panelas',
-    //   data: id,
-    //   config: { headers: { 'Content-Type': 'application/json' } }
-    // })
-    axios.put(`http://raspberrypi.local:3333/panelas`, {
-      action: 'changeMode',
-      modo: 'auto',
-      id: id,
-      temperatura: temperatura,
-      tempo: tempo,
+    // axios.put(`http://raspberrypi.local:3333/panelas`, {
+    //   action: 'changeMode',
+    //   modo: 'auto',
+    //   id: id,
+    //   temperatura: temperatura,
+    //   tempo: tempo,
+    // });
+
+    axios.put(`http://raspberrypi.local:3333/processo`, {
+      //estado,modo,done,potencia,temperatura,tempo
+
+      action: 'addProcessoPanela',
+      dado: {
+        modo: 1,
+        estado: 0,
+        id: id,
+        potencia: 0,
+        done: false,
+        temperatura: temperatura,
+        tempo: tempo,
+      },
     });
   }
 
@@ -191,7 +206,7 @@ function Panela({ panela }) {
         title={panela.nome}
         loading={!panela.estado}
         bordered
-        extra={<Switch checked={panela.estado} onChange={onOff} />}
+        extra={[<Switch checked={panela.estado} onChange={onOff} />]}
         style={{
           backgroundColor: '#fff',
           border: 2,
@@ -200,45 +215,75 @@ function Panela({ panela }) {
           borderColor: '#000',
         }}
       >
+        <Card style={{ margin: 5 }} type="inner">
+          {panela.modo === 0 ? 'Modo potencia' : 'Modo automatico'}
+          {panela.estado === 1 && <Spin style={{ margin: 16 }} />}
+          {panela.modo === 1 && panela.estado === 1 && (
+            <Badge count={<ClockCircleOutlined />}>
+              {secondsToHms(panela.tempodesejado)}
+            </Badge>
+          )}
+          <Row>
+            <Col span={12}>
+              {panela.modo === 1 && panela.estado === 1 && (
+                <Button
+                  style={{ marginTop: 16 }}
+                  type="primary"
+                  onClick={addTime}
+                  icon={<PlusOutlined />}
+                >
+                  Tempo
+                </Button>
+              )}
+            </Col>
+            <Col span={12}>
+              {panela.estado === 1 && (
+                <Popconfirm
+                  onConfirm={skipTime}
+                  title="Confirma?"
+                  okText="Finaliza"
+                  cancelText="Cancela"
+                >
+                  <Button
+                    style={{ marginTop: 16 }}
+                    type="primary"
+                    icon={<CheckOutlined />}
+                  >
+                    Finalizar
+                  </Button>
+                </Popconfirm>
+              )}
+            </Col>
+          </Row>
+        </Card>
+
         <Row justify="center">
           <Col span={12}>
-            <Statistic
-              title="Temperatura"
-              value={panela.temperatura}
-              precision={2}
-              valueStyle={{ color: '#3f8600' }}
-              suffix="C"
-            />
-            <Tag color="processing" onClick={showModalTemp}>
-              SP: {panela.tempdesejada}C
-            </Tag>
+            <Badge count={panela.tempdesejada} style={{ marginTop: 10 }}>
+              <Avatar
+                shape="circle"
+                size={100}
+                onClick={showModalTemp}
+                style={
+                  panela.tempReached ? { color: '#237804' } : { color: '#000' }
+                }
+              >
+                {panela.temperatura}C
+              </Avatar>
+            </Badge>
           </Col>
 
           <Col span={12}>
             <Progress
               type="circle"
               percent={panela.potencia}
-              width={80}
+              width={100}
               onClick={showModal}
             >
               Potencia
             </Progress>
           </Col>
         </Row>
-        <Divider />
-        <Col span={12}>
-          <Statistic
-            title="Tempo restante"
-            value={secondsToHms(panela.tempodesejado)}
-            precision={0}
-          />
-          <Button style={{ marginTop: 16 }} type="primary" onClick={addTime}>
-            Adicionar
-          </Button>
-          <Button style={{ marginTop: 16 }} type="danger" onClick={skipTime}>
-            Skip
-          </Button>
-        </Col>
       </Card>
       <Modal
         title="Alterar potencia"

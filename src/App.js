@@ -14,7 +14,7 @@ const App = () => {
   const [config, setConfig] = useState();
   const [sensores, setSensores] = useState();
   async function getConfig() {
-    console.log('Tentando conectar');
+    //console.log('Tentando conectar');
     try {
       const res = await axios.get('http://raspberrypi.local:3333/config', {
         timeout: 3000,
@@ -23,7 +23,7 @@ const App = () => {
       setConfig(res.data);
       setConectado(true);
 
-      console.log('chegou config', config);
+      //console.log('chegou config', config);
     } catch (error) {
       setConectado(false);
       console.log(error);
@@ -33,9 +33,9 @@ const App = () => {
     const res = await axios.get('http://raspberrypi.local:3333/sensores');
     setSensores(res.data);
 
-    console.log('chegou sensores', sensores);
+    // console.log('chegou sensores', sensores);
   }
-  console.log('pagina', pagina);
+  //console.log('pagina', pagina);
   switch (pagina) {
     case 0:
       return (
